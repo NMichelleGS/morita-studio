@@ -1,528 +1,837 @@
-/* ==================================================
+/* =====================================================
    MORITA STUDIO
-   SISTEMA DE RESERVAS Y COTIZACIÓN
-================================================== */
+   SISTEMA DE RESERVAS + LOGIN
+===================================================== */
 
 
-/* =========================
-   BOTÓN IR A SERVICIOS
-========================= */
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-function irServicios() {
-
-    document.getElementById("servicios").scrollIntoView({
-        behavior: "smooth"
-    });
-
-}
-
-
-/* =========================
-   FORMATO DE DINERO
-========================= */
-
-function formatoPrecio(numero) {
-
-    return "$" + numero.toLocaleString("es-CO");
-
-}
+const PRECIO_DOMICILIO = 7100;
+const PRECIO_RETIRO = 7000;
+const PRECIO_FRANCES = 5000;
+const PRECIO_DISENO = 5000;
+const PRECIO_PIEDRA = 500;
+const PRECIO_CAVIAR = 200;
+const PRECIO_SPA = 7000;
 
 
-/* =========================
-   MOSTRAR FRANCES
-========================= */
+/* =====================================================
+   INICIO
+===================================================== */
 
-function mostrarFrances() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const frances = document.getElementById("frances");
-    const opciones = document.getElementById("francesOpciones");
+    establecerFechaMinima();
 
-    if (frances.checked) {
+    cargarUsuarioActual();
 
-        opciones.classList.remove("oculto");
-
-    } else {
-
-        opciones.classList.add("oculto");
-
-    }
+    configurarEventos();
 
     actualizarCotizacion();
 
-}
+});
 
 
-/* =========================
-   MOSTRAR PIEDRERÍA
-========================= */
+/* =====================================================
+   MENU MOVIL
+===================================================== */
 
-function mostrarPiedreria() {
+function alternarMenu() {
 
-    const piedreria = document.getElementById("piedreria");
-    const opciones = document.getElementById("piedreriaOpciones");
+    const nav = document.getElementById("navMenu");
 
-    if (piedreria.checked) {
-
-        opciones.classList.remove("oculto");
-
-    } else {
-
-        opciones.classList.add("oculto");
-
-    }
-
-    actualizarCotizacion();
+    nav.classList.toggle("active");
 
 }
 
 
-/* =========================
-   MOSTRAR CAVIAR
-========================= */
+/* =====================================================
+   NAVEGACION
+===================================================== */
 
-function mostrarCaviar() {
+function irReservar() {
 
-    const caviar = document.getElementById("caviar");
-    const opciones = document.getElementById("caviarOpciones");
-
-    if (caviar.checked) {
-
-        opciones.classList.remove("oculto");
-
-    } else {
-
-        opciones.classList.add("oculto");
-
-    }
-
-    actualizarCotizacion();
+    document
+        .getElementById("reservar")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
-/* =========================
-   MOSTRAR REGALO
-========================= */
+/* =====================================================
+   FECHA MINIMA
+===================================================== */
 
-function mostrarRegalo() {
+function establecerFechaMinima() {
 
-    const primera = document.querySelector(
-        'input[name="primera"]:checked'
-    );
+    const fecha = document.getElementById("fechaCita");
 
-    const regalo = document.getElementById("regaloOpciones");
+    if (!fecha) return;
 
-    if (primera && primera.value === "si") {
+    const hoy = new Date();
 
-        regalo.classList.remove("oculto");
+    const year = hoy.getFullYear();
 
-    } else {
+    const month = String(
+        hoy.getMonth() + 1
+    ).padStart(2, "0");
 
-        regalo.classList.add("oculto");
+    const day = String(
+        hoy.getDate()
+    ).padStart(2, "0");
 
-        document.querySelectorAll('input[name="spa"]').forEach(
-            radio => radio.checked = false
-        );
-
-    }
-
-    actualizarCotizacion();
+    fecha.min =
+        `${year}-${month}-${day}`;
 
 }
 
 
-/* =========================
-   OBTENER SERVICIOS
-========================= */
+/* =====================================================
+   EVENTOS
+===================================================== */
 
-function obtenerServicios() {
+function configurarEventos() {
 
-    const seleccionados = [];
+    document
+        .querySelectorAll(".servicio")
+        .forEach(input => {
 
-    document.querySelectorAll(".servicio:checked").forEach(
-        servicio => {
-
-            seleccionados.push({
-                nombre: servicio.value,
-                precio: Number(servicio.dataset.precio)
-            });
-
-        }
-    );
-
-    return seleccionados;
-
-}
-
-
-/* =========================
-   ACTUALIZAR COTIZACIÓN
-========================= */
-
-function actualizarCotizacion() {
-
-    const resumen = document.getElementById("resumenContenido");
-    const totalElemento = document.getElementById("total");
-
-    let total = 0;
-
-    let html = "";
-
-    const servicios = obtenerServicios();
-
-
-    /* =========================
-       SERVICIOS
-    ========================== */
-
-    if (servicios.length === 0) {
-
-        html += `
-            <p class="vacio">
-                💅🏻 Selecciona algún servicio para comenzar.
-            </p>
-        `;
-
-    } else {
-
-        html += `
-            <h3 style="color:#bd648c; margin-bottom:15px;">
-                💅🏻 Servicios
-            </h3>
-        `;
-
-
-        servicios.forEach(servicio => {
-
-            total += servicio.precio;
-
-            html += `
-                <div class="resumen-item">
-
-                    <span>
-                        💅🏻 ${servicio.nombre}
-                    </span>
-
-                    <span>
-                        ${formatoPrecio(servicio.precio)}
-                    </span>
-
-                </div>
-            `;
+            input.addEventListener(
+                "change",
+                actualizarCotizacion
+            );
 
         });
 
-    }
 
+    document
+        .getElementById("frances")
+        .addEventListener(
+            "change",
+            function () {
 
-    /* =========================
-       FRANCES
-    ========================== */
-
-    const frances = document.getElementById("frances");
-
-    if (frances.checked) {
-
-        const tipoFrances =
-            document.getElementById("tipoFrances").value;
-
-        const cantidadFrances =
-            Number(
-                document.getElementById("cantidadFrances").value
-            );
-
-        const precioFrances = 5000;
-
-        total += precioFrances;
-
-        html += `
-            <div class="resumen-item">
-
-                <span>
-                    🤍 Frances ${tipoFrances}
-                    <br>
-                    <small class="resumen-sub">
-                        ${cantidadFrances} uñas
-                    </small>
-                </span>
-
-                <span>
-                    ${formatoPrecio(precioFrances)}
-                </span>
-
-            </div>
-        `;
-
-    }
-
-
-    /* =========================
-       DISEÑO ELABORADO
-    ========================== */
-
-    const diseno = document.getElementById("diseno");
-
-    if (diseno.checked) {
-
-        const precioDiseno = 5000;
-
-        total += precioDiseno;
-
-        html += `
-            <div class="resumen-item">
-
-                <span>
-                    🎨 Diseño elaborado
-                </span>
-
-                <span>
-                    ${formatoPrecio(precioDiseno)}
-                </span>
-
-            </div>
-        `;
-
-    }
-
-
-    /* =========================
-       PIEDRERÍA
-    ========================== */
-
-    const piedreria =
-        document.getElementById("piedreria");
-
-    if (piedreria.checked) {
-
-        const tipo =
-            document.getElementById("tipoPiedreria").value;
-
-        const cantidad =
-            Number(
-                document.getElementById("cantidadPiedreria").value
-            );
-
-        const precioPepita = 500;
-
-        const precioTotalPiedreria =
-            cantidad * precioPepita;
-
-        total += precioTotalPiedreria;
-
-        html += `
-            <div class="resumen-item">
-
-                <span>
-                    💎 ${tipo}
-                    <br>
-
-                    <small class="resumen-sub">
-                        ${cantidad} pepita${cantidad !== 1 ? "s" : ""}
-                    </small>
-                </span>
-
-                <span>
-                    ${formatoPrecio(precioTotalPiedreria)}
-                </span>
-
-            </div>
-        `;
-
-
-        /* =========================
-           CAVIAR
-        ========================== */
-
-        const caviar =
-            document.getElementById("caviar");
-
-        if (caviar.checked) {
-
-            const cantidadCaviar =
-                Number(
-                    document.getElementById("cantidadCaviar").value
+                mostrarOcultar(
+                    "opcionesFrances",
+                    this.checked
                 );
 
-            const precioCaviarPorUña = 200;
+                actualizarCotizacion();
 
-            const totalCaviar =
-                cantidadCaviar * precioCaviarPorUña;
-
-            total += totalCaviar;
-
-            html += `
-                <div class="resumen-item">
-
-                    <span>
-                        🫧 Caviar
-                        <br>
-
-                        <small class="resumen-sub">
-                            ${cantidadCaviar} uña${cantidadCaviar !== 1 ? "s" : ""}
-                        </small>
-                    </span>
-
-                    <span>
-                        ${formatoPrecio(totalCaviar)}
-                    </span>
-
-                </div>
-            `;
-
-        }
-
-    }
-
-
-    /* =========================
-       RETIRO
-    ========================== */
-
-    const retiro =
-        document.getElementById("retiro");
-
-    if (retiro.checked) {
-
-        const precioRetiro = 7000;
-
-        total += precioRetiro;
-
-        html += `
-            <div class="resumen-item">
-
-                <span>
-                    ♻️ Retiro de sistema de otro lugar
-                </span>
-
-                <span>
-                    ${formatoPrecio(precioRetiro)}
-                </span>
-
-            </div>
-        `;
-
-    }
-
-
-    /* =========================
-       PRIMERA VISITA / SPA
-    ========================== */
-
-    const primera =
-        document.querySelector(
-            'input[name="primera"]:checked'
+            }
         );
 
-    if (primera && primera.value === "si") {
 
-        const spa =
-            document.querySelector(
-                'input[name="spa"]:checked'
+    document
+        .getElementById("disenoElaborado")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("piedreria")
+        .addEventListener(
+            "change",
+            function () {
+
+                mostrarOcultar(
+                    "opcionesPiedreria",
+                    this.checked
+                );
+
+                actualizarCotizacion();
+
+            }
+        );
+
+
+    document
+        .getElementById("caviar")
+        .addEventListener(
+            "change",
+            function () {
+
+                mostrarOcultar(
+                    "opcionesCaviar",
+                    this.checked
+                );
+
+                actualizarCotizacion();
+
+            }
+        );
+
+
+    document
+        .getElementById("retiro")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("cantidadPiedreria")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("cantidadCaviar")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("tipoFrances")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("cantidadFrances")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("tipoSpa")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("spaNormal")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .querySelectorAll(
+            'input[name="ubicacion"]'
+        )
+        .forEach(input => {
+
+            input.addEventListener(
+                "change",
+                function () {
+
+                    const esDomicilio =
+                        this.value === "Domicilio";
+
+                    mostrarOcultar(
+                        "campoDireccion",
+                        esDomicilio
+                    );
+
+                    actualizarCotizacion();
+
+                }
             );
 
-        if (spa) {
+        });
 
-            html += `
-                <div class="resumen-item">
 
-                    <span>
-                        🎁 SPA de primera visita
-                        <br>
+    document
+        .getElementById("nombreCliente")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
 
-                        <small class="resumen-sub">
-                            ${spa.value} — GRATIS 💗
-                        </small>
-                    </span>
 
-                    <span>
-                        GRATIS
-                    </span>
+    document
+        .getElementById("telefonoCliente")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
 
-                </div>
-            `;
 
-        }
+    document
+        .getElementById("fechaCita")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("horaCita")
+        .addEventListener(
+            "change",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("notaCliente")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
+
+
+    document
+        .getElementById("direccion")
+        .addEventListener(
+            "input",
+            actualizarCotizacion
+        );
+
+}
+
+
+/* =====================================================
+   MOSTRAR / OCULTAR
+===================================================== */
+
+function mostrarOcultar(id, mostrar) {
+
+    const elemento =
+        document.getElementById(id);
+
+    if (!elemento) return;
+
+    elemento.classList.toggle(
+        "hidden",
+        !mostrar
+    );
+
+}
+
+
+/* =====================================================
+   USUARIOS
+===================================================== */
+
+function obtenerUsuarios() {
+
+    return JSON.parse(
+        localStorage.getItem("moritaUsuarios")
+    ) || [];
+
+}
+
+
+function guardarUsuarios(usuarios) {
+
+    localStorage.setItem(
+        "moritaUsuarios",
+        JSON.stringify(usuarios)
+    );
+
+}
+
+
+/* =====================================================
+   CREAR CUENTA
+===================================================== */
+
+function crearCuenta(event) {
+
+    event.preventDefault();
+
+    const nombre =
+        document
+            .getElementById("registroNombre")
+            .value
+            .trim();
+
+    const telefono =
+        document
+            .getElementById("registroTelefono")
+            .value
+            .trim();
+
+    const correo =
+        document
+            .getElementById("registroCorreo")
+            .value
+            .trim()
+            .toLowerCase();
+
+    const password =
+        document
+            .getElementById("registroPassword")
+            .value;
+
+
+    const error =
+        document.getElementById(
+            "errorRegistro"
+        );
+
+
+    error.textContent = "";
+
+
+    if (
+        !nombre ||
+        !telefono ||
+        !correo ||
+        !password
+    ) {
+
+        error.textContent =
+            "Completa todos los campos.";
+
+        return;
 
     }
 
 
-    /* =========================
-       UBICACIÓN
-    ========================== */
+    if (password.length < 6) {
 
-    const ubicacion =
+        error.textContent =
+            "La contraseña debe tener mínimo 6 caracteres.";
+
+        return;
+
+    }
+
+
+    const usuarios =
+        obtenerUsuarios();
+
+
+    const usuarioExiste =
+        usuarios.some(
+            usuario =>
+                usuario.correo === correo
+        );
+
+
+    if (usuarioExiste) {
+
+        error.textContent =
+            "Este correo ya tiene una cuenta.";
+
+        return;
+
+    }
+
+
+    const nuevoUsuario = {
+
+        id:
+            Date.now(),
+
+        nombre,
+
+        telefono,
+
+        correo,
+
+        password,
+
+        primeraCitaDisponible: true,
+
+        primeraCitaUsada: false
+
+    };
+
+
+    usuarios.push(
+        nuevoUsuario
+    );
+
+
+    guardarUsuarios(
+        usuarios
+    );
+
+
+    localStorage.setItem(
+        "moritaUsuarioActual",
+        JSON.stringify(nuevoUsuario)
+    );
+
+
+    cerrarModalLogin();
+
+    cargarUsuarioActual();
+
+
+    document.getElementById(
+        "nombreCliente"
+    ).value = nombre;
+
+
+    document.getElementById(
+        "telefonoCliente"
+    ).value = telefono;
+
+
+    actualizarCotizacion();
+
+
+    mostrarMensajeExito(
+        "🎉 ¡Cuenta creada! Tu beneficio de primera cita está disponible."
+    );
+
+}
+
+
+/* =====================================================
+   INICIAR SESION
+===================================================== */
+
+function iniciarSesion(event) {
+
+    event.preventDefault();
+
+
+    const correo =
+        document
+            .getElementById("loginCorreo")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    const error =
+        document.getElementById(
+            "errorLogin"
+        );
+
+
+    error.textContent = "";
+
+
+    const usuarios =
+        obtenerUsuarios();
+
+
+    const usuario =
+        usuarios.find(
+            user =>
+                user.correo === correo &&
+                user.password === password
+        );
+
+
+    if (!usuario) {
+
+        error.textContent =
+            "Correo o contraseña incorrectos.";
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "moritaUsuarioActual",
+        JSON.stringify(usuario)
+    );
+
+
+    cerrarModalLogin();
+
+    cargarUsuarioActual();
+
+
+    document.getElementById(
+        "nombreCliente"
+    ).value =
+        usuario.nombre;
+
+
+    document.getElementById(
+        "telefonoCliente"
+    ).value =
+        usuario.telefono;
+
+
+    actualizarCotizacion();
+
+
+    mostrarMensajeExito(
+        `💗 ¡Bienvenida nuevamente, ${usuario.nombre.split(" ")[0]}!`
+    );
+
+}
+
+
+/* =====================================================
+   CARGAR USUARIO
+===================================================== */
+
+function obtenerUsuarioActual() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "moritaUsuarioActual"
+        )
+    );
+
+}
+
+
+function cargarUsuarioActual() {
+
+    const usuario =
+        obtenerUsuarioActual();
+
+
+    const btnLogin =
+        document.getElementById(
+            "btnAbrirLogin"
+        );
+
+
+    const usuarioHeader =
+        document.getElementById(
+            "usuarioHeader"
+        );
+
+
+    const nombreHeader =
+        document.getElementById(
+            "nombreUsuarioHeader"
+        );
+
+
+    if (!usuario) {
+
+        btnLogin.classList.remove(
+            "hidden"
+        );
+
+        usuarioHeader.classList.add(
+            "hidden"
+        );
+
+        actualizarBeneficio();
+
+        return;
+
+    }
+
+
+    btnLogin.classList.add(
+        "hidden"
+    );
+
+
+    usuarioHeader.classList.remove(
+        "hidden"
+    );
+
+
+    nombreHeader.textContent =
+        `Hola, ${usuario.nombre.split(" ")[0]} 💗`;
+
+
+    document.getElementById(
+        "nombreCliente"
+    ).value =
+        usuario.nombre;
+
+
+    document.getElementById(
+        "telefonoCliente"
+    ).value =
+        usuario.telefono;
+
+
+    actualizarBeneficio();
+
+}
+
+
+/* =====================================================
+   CERRAR SESION
+===================================================== */
+
+function cerrarSesion() {
+
+    localStorage.removeItem(
+        "moritaUsuarioActual"
+    );
+
+
+    document.getElementById(
+        "tipoSpa"
+    ).value = "";
+
+
+    document.getElementById(
+        "spaNormal"
+    ).value = "";
+
+
+    cargarUsuarioActual();
+
+    actualizarCotizacion();
+
+
+    mostrarMensajeExito(
+        "Has cerrado sesión. 💗"
+    );
+
+}
+
+
+/* =====================================================
+   BENEFICIO PRIMERA CITA
+===================================================== */
+
+function actualizarBeneficio() {
+
+    const usuario =
+        obtenerUsuarioActual();
+
+
+    const sinLogin =
+        document.getElementById(
+            "beneficioNoLogin"
+        );
+
+
+    const disponible =
+        document.getElementById(
+            "beneficioDisponible"
+        );
+
+
+    const usado =
+        document.getElementById(
+            "beneficioUsado"
+        );
+
+
+    sinLogin.classList.add(
+        "hidden"
+    );
+
+    disponible.classList.add(
+        "hidden"
+    );
+
+    usado.classList.add(
+        "hidden"
+    );
+
+
+    if (!usuario) {
+
+        sinLogin.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        usuario.primeraCitaDisponible &&
+        !usuario.primeraCitaUsada
+    ) {
+
+        disponible.classList.remove(
+            "hidden"
+        );
+
+    } else {
+
+        usado.classList.remove(
+            "hidden"
+        );
+
+    }
+
+
+    actualizarCotizacion();
+
+}
+
+
+/* =====================================================
+   OBTENER SERVICIOS
+===================================================== */
+
+function obtenerServicios() {
+
+    const seleccionados =
+        document.querySelectorAll(
+            ".servicio:checked"
+        );
+
+
+    return Array.from(
+        seleccionados
+    ).map(input => ({
+
+        nombre:
+            input.value,
+
+        precio:
+            Number(
+                input.dataset.precio
+            )
+
+    }));
+
+}
+
+
+/* =====================================================
+   OBTENER UBICACION
+===================================================== */
+
+function obtenerUbicacion() {
+
+    const seleccionada =
         document.querySelector(
             'input[name="ubicacion"]:checked'
         );
 
-    if (ubicacion) {
 
-        const precioUbicacion =
-            Number(ubicacion.dataset.precio);
-
-        if (precioUbicacion > 0) {
-
-            total += precioUbicacion;
-
-            html += `
-                <div class="resumen-item">
-
-                    <span>
-                        🏠 Domicilio
-                    </span>
-
-                    <span>
-                        ${formatoPrecio(precioUbicacion)}
-                    </span>
-
-                </div>
-            `;
-
-        } else {
-
-            html += `
-                <div class="resumen-item">
-
-                    <span>
-                        🌸 Atención en Morita Studio
-                    </span>
-
-                    <span>
-                        $0
-                    </span>
-
-                </div>
-            `;
-
-        }
-
-    }
-
-
-    /* =========================
-       ACTUALIZAR HTML
-    ========================== */
-
-    resumen.innerHTML = html;
-
-    totalElemento.textContent =
-        formatoPrecio(total);
+    return seleccionada
+        ? seleccionada.value
+        : "Estudio";
 
 }
 
 
-/* =========================
-   OBTENER PRECIO FINAL
-========================= */
+/* =====================================================
+   CALCULAR TOTAL
+===================================================== */
 
 function calcularTotal() {
 
     let total = 0;
 
 
-    /* Servicios */
+    const servicios =
+        obtenerServicios();
 
-    const servicios = obtenerServicios();
 
     servicios.forEach(servicio => {
 
@@ -531,87 +840,164 @@ function calcularTotal() {
     });
 
 
-    /* Frances */
+    /* FRANCES */
 
-    if (
-        document.getElementById("frances").checked
-    ) {
-
-        total += 5000;
-
-    }
+    const frances =
+        document.getElementById(
+            "frances"
+        ).checked;
 
 
-    /* Diseño */
+    if (frances) {
 
-    if (
-        document.getElementById("diseno").checked
-    ) {
-
-        total += 5000;
+        total += PRECIO_FRANCES;
 
     }
 
 
-    /* Piedrería */
+    /* DISEÑO */
 
-    if (
-        document.getElementById("piedreria").checked
-    ) {
+    const diseno =
+        document.getElementById(
+            "disenoElaborado"
+        ).checked;
+
+
+    if (diseno) {
+
+        total += PRECIO_DISENO;
+
+    }
+
+
+    /* PIEDRERIA */
+
+    const piedreria =
+        document.getElementById(
+            "piedreria"
+        ).checked;
+
+
+    if (piedreria) {
 
         const cantidad =
-            Number(
-                document.getElementById(
-                    "cantidadPiedreria"
-                ).value
-            );
-
-        total += cantidad * 500;
-
-
-        /* Caviar */
-
-        if (
-            document.getElementById("caviar").checked
-        ) {
-
-            const cantidadCaviar =
+            Math.max(
+                1,
                 Number(
                     document.getElementById(
-                        "cantidadCaviar"
+                        "cantidadPiedreria"
                     ).value
-                );
+                ) || 1
+            );
 
-            total += cantidadCaviar * 200;
 
-        }
+        total +=
+            cantidad *
+            PRECIO_PIEDRA;
 
     }
 
 
-    /* Retiro */
+    /* CAVIAR */
+
+    const caviar =
+        document.getElementById(
+            "caviar"
+        ).checked;
+
+
+    if (caviar) {
+
+        const cantidad =
+            Math.min(
+                10,
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "cantidadCaviar"
+                        ).value
+                    ) || 1
+                )
+            );
+
+
+        total +=
+            cantidad *
+            PRECIO_CAVIAR;
+
+    }
+
+
+    /* RETIRO */
+
+    const retiro =
+        document.getElementById(
+            "retiro"
+        ).checked;
+
+
+    if (retiro) {
+
+        total += PRECIO_RETIRO;
+
+    }
+
+
+    /* DOMICILIO */
 
     if (
-        document.getElementById("retiro").checked
+        obtenerUbicacion() ===
+        "Domicilio"
     ) {
 
-        total += 7000;
+        total +=
+            PRECIO_DOMICILIO;
 
     }
 
 
-    /* Domicilio */
+    /* SPA */
 
-    const ubicacion =
-        document.querySelector(
-            'input[name="ubicacion"]:checked'
-        );
+    const usuario =
+        obtenerUsuarioActual();
 
-    if (ubicacion) {
 
-        total += Number(
-            ubicacion.dataset.precio
-        );
+    if (usuario) {
+
+        if (
+            usuario.primeraCitaDisponible &&
+            !usuario.primeraCitaUsada
+        ) {
+
+            const spa =
+                document.getElementById(
+                    "tipoSpa"
+                ).value;
+
+
+            if (spa) {
+
+                // Es gratis.
+                total += 0;
+
+            }
+
+        } else {
+
+            const spa =
+                document.getElementById(
+                    "spaNormal"
+                ).value;
+
+
+            if (spa) {
+
+                total += PRECIO_SPA;
+
+            }
+
+        }
 
     }
 
@@ -621,449 +1007,908 @@ function calcularTotal() {
 }
 
 
-/* =========================
-   WHATSAPP
-========================= */
+/* =====================================================
+   ACTUALIZAR COTIZACION
+===================================================== */
 
-function abrirWhatsApp() {
+function actualizarCotizacion() {
 
-    const servicios = obtenerServicios();
-
-
-    /* =========================
-       VALIDAR SERVICIO
-    ========================== */
-
-    if (servicios.length === 0) {
-
-        alert(
-            "💗 Por favor selecciona al menos un servicio."
+    const resumen =
+        document.getElementById(
+            "resumen"
         );
 
-        document
-            .getElementById("servicios")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
 
-        return;
+    const totalElemento =
+        document.getElementById(
+            "total"
+        );
+
+
+    const servicios =
+        obtenerServicios();
+
+
+    let html = "";
+
+    let hayAlgo = false;
+
+
+    /* SERVICIOS */
+
+    if (servicios.length > 0) {
+
+        hayAlgo = true;
+
+
+        html += `
+            <div class="summary-subtitle">
+                💅 Servicios
+            </div>
+        `;
+
+
+        servicios.forEach(servicio => {
+
+            html += `
+                <div class="summary-item">
+                    <span>${servicio.nombre}</span>
+                    <span>${formatearDinero(servicio.precio)}</span>
+                </div>
+            `;
+
+        });
 
     }
 
 
-    /* =========================
-       DATOS
-    ========================== */
+    /* FRANCES */
 
-    const nombre =
-        document.getElementById("nombre").value.trim();
+    if (
+        document.getElementById(
+            "frances"
+        ).checked
+    ) {
 
-    const telefono =
-        document.getElementById("telefono").value.trim();
-
-    const fecha =
-        document.getElementById("fecha").value;
-
-    const hora =
-        document.getElementById("hora").value;
-
-    const nota =
-        document.getElementById("nota").value.trim();
+        hayAlgo = true;
 
 
-    if (!nombre) {
-
-        alert(
-            "🌸 Por favor escribe tu nombre."
-        );
-
-        document.getElementById("nombre").focus();
-
-        return;
-
-    }
-
-
-    if (!telefono) {
-
-        alert(
-            "📱 Por favor escribe tu número de teléfono."
-        );
-
-        document.getElementById("telefono").focus();
-
-        return;
-
-    }
-
-
-    if (!fecha) {
-
-        alert(
-            "📅 Por favor selecciona una fecha."
-        );
-
-        document.getElementById("fecha").focus();
-
-        return;
-
-    }
-
-
-    if (!hora) {
-
-        alert(
-            "🕐 Por favor selecciona una hora."
-        );
-
-        document.getElementById("hora").focus();
-
-        return;
-
-    }
-
-
-    /* =========================
-       CREAR MENSAJE
-    ========================== */
-
-    let mensaje =
-        "💗✨ ¡Hola Michelle! Quiero reservar una cita en Morita Studio 🌸💅🏻\n\n";
-
-
-    mensaje +=
-        "👩🏻 *DATOS DE LA CLIENTA*\n";
-
-    mensaje +=
-        "Nombre: " + nombre + "\n";
-
-    mensaje +=
-        "Teléfono: " + telefono + "\n\n";
-
-
-    /* =========================
-       SERVICIOS
-    ========================== */
-
-    mensaje +=
-        "💅🏻 *SERVICIOS*\n";
-
-    servicios.forEach(servicio => {
-
-        mensaje +=
-            "• " +
-            servicio.nombre +
-            " — " +
-            formatoPrecio(servicio.precio) +
-            "\n";
-
-    });
-
-    mensaje += "\n";
-
-
-    /* =========================
-       FRANCES
-    ========================== */
-
-    const frances =
-        document.getElementById("frances");
-
-    if (frances.checked) {
-
-        const tipoFrances =
+        const tipo =
             document.getElementById(
                 "tipoFrances"
             ).value;
 
-        const cantidadFrances =
+
+        const cantidad =
             document.getElementById(
                 "cantidadFrances"
             ).value;
 
-        mensaje +=
-            "🤍 *FRANCES*\n";
 
-        mensaje +=
-            "• Tipo: " +
-            tipoFrances +
-            "\n";
-
-        mensaje +=
-            "• Cantidad: " +
-            cantidadFrances +
-            " uñas\n";
-
-        mensaje +=
-            "• Adicional: $5.000\n\n";
+        html += `
+            <div class="summary-item">
+                <span>🇫🇷 Frances ${tipo} (${cantidad} uñas)</span>
+                <span>${formatearDinero(PRECIO_FRANCES)}</span>
+            </div>
+        `;
 
     }
 
 
-    /* =========================
-       DISEÑO
-    ========================== */
+    /* DISEÑO */
 
     if (
-        document.getElementById("diseno").checked
+        document.getElementById(
+            "disenoElaborado"
+        ).checked
     ) {
 
-        mensaje +=
-            "🎨 *DISEÑO ELABORADO*\n";
+        hayAlgo = true;
 
-        mensaje +=
-            "• Adicional: $5.000\n\n";
+
+        html += `
+            <div class="summary-item">
+                <span>🎨 Diseño elaborado</span>
+                <span>${formatearDinero(PRECIO_DISENO)}</span>
+            </div>
+        `;
 
     }
 
 
-    /* =========================
-       PIEDRERÍA
-    ========================== */
+    /* PIEDRERIA */
 
-    const piedreria =
-        document.getElementById("piedreria");
+    if (
+        document.getElementById(
+            "piedreria"
+        ).checked
+    ) {
 
-    if (piedreria.checked) {
+        hayAlgo = true;
+
 
         const tipo =
             document.getElementById(
                 "tipoPiedreria"
             ).value;
 
+
         const cantidad =
-            Number(
-                document.getElementById(
-                    "cantidadPiedreria"
-                ).value
-            );
-
-        const precio =
-            cantidad * 500;
-
-        mensaje +=
-            "💎 *PIEDRERÍA*\n";
-
-        mensaje +=
-            "• Tipo: " +
-            tipo +
-            "\n";
-
-        mensaje +=
-            "• Cantidad: " +
-            cantidad +
-            " pepita" +
-            (cantidad !== 1 ? "s" : "") +
-            "\n";
-
-        mensaje +=
-            "• Precio: " +
-            formatoPrecio(precio) +
-            "\n";
-
-
-        /* CAVIAR */
-
-        if (
-            document.getElementById("caviar").checked
-        ) {
-
-            const cantidadCaviar =
+            Math.max(
+                1,
                 Number(
                     document.getElementById(
-                        "cantidadCaviar"
+                        "cantidadPiedreria"
                     ).value
-                );
-
-            const precioCaviar =
-                cantidadCaviar * 200;
-
-            mensaje +=
-                "• 🫧 Caviar: " +
-                cantidadCaviar +
-                " uñas — " +
-                formatoPrecio(precioCaviar) +
-                "\n";
-
-        }
-
-        mensaje += "\n";
-
-    }
-
-
-    /* =========================
-       RETIRO
-    ========================== */
-
-    if (
-        document.getElementById("retiro").checked
-    ) {
-
-        mensaje +=
-            "♻️ *RETIRO*\n";
-
-        mensaje +=
-            "• Sistema realizado en otro lugar\n";
-
-        mensaje +=
-            "• Valor: $7.000\n\n";
-
-    }
-
-
-    /* =========================
-       PRIMERA VISITA
-    ========================== */
-
-    const primera =
-        document.querySelector(
-            'input[name="primera"]:checked'
-        );
-
-    if (
-        primera &&
-        primera.value === "si"
-    ) {
-
-        const spa =
-            document.querySelector(
-                'input[name="spa"]:checked'
+                ) || 1
             );
 
-        mensaje +=
-            "🎁 *PRIMERA VISITA*\n";
 
-        mensaje +=
-            "• Sí, es mi primera cita 💗\n";
+        const precio =
+            cantidad *
+            PRECIO_PIEDRA;
 
-        if (spa) {
 
-            mensaje +=
-                "• SPA elegido: " +
-                spa.value +
-                "\n";
-
-            mensaje +=
-                "• Valor: GRATIS 🎀\n";
-
-        }
-
-        mensaje += "\n";
-
-    } else {
-
-        mensaje +=
-            "💅🏻 *CLIENTA FRECUENTE*\n";
-
-        mensaje +=
-            "• No es mi primera cita\n\n";
+        html += `
+            <div class="summary-item">
+                <span>💎 ${tipo} (${cantidad} pepitas)</span>
+                <span>${formatearDinero(precio)}</span>
+            </div>
+        `;
 
     }
 
 
-    /* =========================
-       UBICACIÓN
-    ========================== */
+    /* CAVIAR */
 
-    const ubicacion =
-        document.querySelector(
-            'input[name="ubicacion"]:checked'
-        );
+    if (
+        document.getElementById(
+            "caviar"
+        ).checked
+    ) {
 
-    if (ubicacion) {
+        hayAlgo = true;
 
-        mensaje +=
-            "📍 *UBICACIÓN*\n";
+
+        const cantidad =
+            Math.min(
+                10,
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "cantidadCaviar"
+                        ).value
+                    ) || 1
+                )
+            );
+
+
+        const precio =
+            cantidad *
+            PRECIO_CAVIAR;
+
+
+        html += `
+            <div class="summary-item">
+                <span>✨ Caviar (${cantidad} uñas)</span>
+                <span>${formatearDinero(precio)}</span>
+            </div>
+        `;
+
+    }
+
+
+    /* RETIRO */
+
+    if (
+        document.getElementById(
+            "retiro"
+        ).checked
+    ) {
+
+        hayAlgo = true;
+
+
+        html += `
+            <div class="summary-item">
+                <span>🧹 Retiro de otro lugar</span>
+                <span>${formatearDinero(PRECIO_RETIRO)}</span>
+            </div>
+        `;
+
+    }
+
+
+    /* SPA */
+
+    const usuario =
+        obtenerUsuarioActual();
+
+
+    if (usuario) {
 
         if (
-            ubicacion.value === "Domicilio"
+            usuario.primeraCitaDisponible &&
+            !usuario.primeraCitaUsada
         ) {
 
-            mensaje +=
-                "• 🏠 A domicilio\n";
+            const spa =
+                document.getElementById(
+                    "tipoSpa"
+                ).value;
 
-            mensaje +=
-                "• Domicilio: $7.100\n\n";
+
+            if (spa) {
+
+                hayAlgo = true;
+
+
+                html += `
+                    <div class="summary-item">
+                        <span>🎁 SPA de bienvenida: ${spa}</span>
+                        <span>GRATIS</span>
+                    </div>
+                `;
+
+            }
 
         } else {
 
-            mensaje +=
-                "• 🌸 Morita Studio\n\n";
+            const spa =
+                document.getElementById(
+                    "spaNormal"
+                ).value;
+
+
+            if (spa) {
+
+                hayAlgo = true;
+
+
+                html += `
+                    <div class="summary-item">
+                        <span>🫧 SPA: ${spa}</span>
+                        <span>${formatearDinero(PRECIO_SPA)}</span>
+                    </div>
+                `;
+
+            }
 
         }
 
     }
 
 
-    /* =========================
-       FECHA Y HORA
-    ========================== */
+    /* UBICACION */
 
-    mensaje +=
-        "📅 *CITA*\n";
-
-    mensaje +=
-        "• Fecha: " +
-        fecha +
-        "\n";
-
-    mensaje +=
-        "• Hora: " +
-        hora +
-        "\n\n";
+    const ubicacion =
+        obtenerUbicacion();
 
 
-    /* =========================
-       NOTA
-    ========================== */
+    hayAlgo = true;
 
-    if (nota) {
 
-        mensaje +=
-            "💬 *NOTA DE LA CLIENTA*\n";
+    html += `
+        <div class="summary-subtitle">
+            📍 Atención
+        </div>
+    `;
 
-        mensaje +=
-            nota +
-            "\n\n";
+
+    if (ubicacion === "Domicilio") {
+
+        html += `
+            <div class="summary-item">
+                <span>🚗 Domicilio</span>
+                <span>${formatearDinero(PRECIO_DOMICILIO)}</span>
+            </div>
+        `;
+
+    } else {
+
+        html += `
+            <div class="summary-item">
+                <span>🏡 Estudio</span>
+                <span>Gratis</span>
+            </div>
+        `;
 
     }
 
 
-    /* =========================
-       TOTAL
-    ========================== */
+    if (!hayAlgo) {
+
+        resumen.innerHTML = `
+            <p class="empty-summary">
+                Selecciona un servicio para comenzar
+                tu cotización. 💗
+            </p>
+        `;
+
+    } else {
+
+        resumen.innerHTML =
+            html;
+
+    }
+
 
     const total =
         calcularTotal();
 
-    mensaje +=
-        "━━━━━━━━━━━━━━━━━━\n";
+
+    totalElemento.textContent =
+        formatearDinero(total);
+
+}
+
+
+/* =====================================================
+   FORMATEAR DINERO
+===================================================== */
+
+function formatearDinero(valor) {
+
+    return new Intl.NumberFormat(
+        "es-CO",
+        {
+            style: "currency",
+            currency: "COP",
+            maximumFractionDigits: 0
+        }
+    ).format(valor);
+
+}
+
+
+/* =====================================================
+   VALIDAR RESERVA
+===================================================== */
+
+function validarReserva() {
+
+    ocultarError();
+
+
+    const servicios =
+        obtenerServicios();
+
+
+    if (servicios.length === 0) {
+
+        mostrarError(
+            "💅 Selecciona al menos un servicio."
+        );
+
+        return false;
+
+    }
+
+
+    const nombre =
+        document
+            .getElementById(
+                "nombreCliente"
+            )
+            .value
+            .trim();
+
+
+    const telefono =
+        document
+            .getElementById(
+                "telefonoCliente"
+            )
+            .value
+            .trim();
+
+
+    const fecha =
+        document
+            .getElementById(
+                "fechaCita"
+            )
+            .value;
+
+
+    const hora =
+        document
+            .getElementById(
+                "horaCita"
+            )
+            .value;
+
+
+    if (!nombre) {
+
+        mostrarError(
+            "🌸 Escribe tu nombre completo."
+        );
+
+        return false;
+
+    }
+
+
+    if (!telefono) {
+
+        mostrarError(
+            "📱 Escribe tu número de teléfono."
+        );
+
+        return false;
+
+    }
+
+
+    if (!fecha) {
+
+        mostrarError(
+            "📅 Selecciona la fecha de tu cita."
+        );
+
+        return false;
+
+    }
+
+
+    if (!hora) {
+
+        mostrarError(
+            "🕐 Selecciona la hora de tu cita."
+        );
+
+        return false;
+
+    }
+
+
+    if (
+        obtenerUbicacion() ===
+        "Domicilio"
+    ) {
+
+        const direccion =
+            document
+                .getElementById(
+                    "direccion"
+                )
+                .value
+                .trim();
+
+
+        if (!direccion) {
+
+            mostrarError(
+                "🏠 Escribe la dirección para el domicilio."
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    const usuario =
+        obtenerUsuarioActual();
+
+
+    if (!usuario) {
+
+        mostrarError(
+            "🔐 Debes iniciar sesión o crear una cuenta antes de reservar."
+        );
+
+        abrirModalLogin();
+
+        return false;
+
+    }
+
+
+    if (
+        usuario.primeraCitaDisponible &&
+        !usuario.primeraCitaUsada
+    ) {
+
+        const spa =
+            document.getElementById(
+                "tipoSpa"
+            ).value;
+
+
+        if (!spa) {
+
+            mostrarError(
+                "🎁 Elige uno de los SPA de bienvenida para utilizar tu beneficio."
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function abrirWhatsApp() {
+
+    if (!validarReserva()) {
+
+        return;
+
+    }
+
+
+    const usuario =
+        obtenerUsuarioActual();
+
+
+    const servicios =
+        obtenerServicios();
+
+
+    const nombre =
+        document
+            .getElementById(
+                "nombreCliente"
+            )
+            .value
+            .trim();
+
+
+    const telefono =
+        document
+            .getElementById(
+                "telefonoCliente"
+            )
+            .value
+            .trim();
+
+
+    const fecha =
+        document
+            .getElementById(
+                "fechaCita"
+            )
+            .value;
+
+
+    const hora =
+        document
+            .getElementById(
+                "horaCita"
+            )
+            .value;
+
+
+    const nota =
+        document
+            .getElementById(
+                "notaCliente"
+            )
+            .value
+            .trim();
+
+
+    const ubicacion =
+        obtenerUbicacion();
+
+
+    const total =
+        calcularTotal();
+
+
+    let mensaje = "";
+
 
     mensaje +=
-        "💗 *TOTAL A PAGAR: " +
-        formatoPrecio(total) +
+        "Hola Michelle 💗, quiero reservar una cita en Morita Studio.\n\n";
+
+
+    mensaje +=
+        "🌸 *DATOS DE LA CLIENTA*\n";
+
+    mensaje +=
+        `👤 Nombre: ${nombre}\n`;
+
+    mensaje +=
+        `📱 Teléfono: ${telefono}\n`;
+
+
+    if (usuario) {
+
+        mensaje +=
+            `📧 Cuenta: ${usuario.correo}\n`;
+
+    }
+
+
+    mensaje +=
+        "\n💅 *SERVICIOS*\n";
+
+
+    servicios.forEach(
+        servicio => {
+
+            mensaje +=
+                `• ${servicio.nombre} — ${formatearDinero(servicio.precio)}\n`;
+
+        }
+    );
+
+
+    /* FRANCES */
+
+    if (
+        document.getElementById(
+            "frances"
+        ).checked
+    ) {
+
+        const tipo =
+            document.getElementById(
+                "tipoFrances"
+            ).value;
+
+
+        const cantidad =
+            document.getElementById(
+                "cantidadFrances"
+            ).value;
+
+
+        mensaje +=
+            `• 🇫🇷 Frances ${tipo} — ${cantidad} uñas — ${formatearDinero(PRECIO_FRANCES)}\n`;
+
+    }
+
+
+    /* DISEÑO */
+
+    if (
+        document.getElementById(
+            "disenoElaborado"
+        ).checked
+    ) {
+
+        mensaje +=
+            `• 🎨 Diseño elaborado — ${formatearDinero(PRECIO_DISENO)}\n`;
+
+    }
+
+
+    /* PIEDRERIA */
+
+    if (
+        document.getElementById(
+            "piedreria"
+        ).checked
+    ) {
+
+        const tipo =
+            document.getElementById(
+                "tipoPiedreria"
+            ).value;
+
+
+        const cantidad =
+            Math.max(
+                1,
+                Number(
+                    document.getElementById(
+                        "cantidadPiedreria"
+                    ).value
+                ) || 1
+            );
+
+
+        const precio =
+            cantidad *
+            PRECIO_PIEDRA;
+
+
+        mensaje +=
+            `• 💎 Piedrería ${tipo} — ${cantidad} pepitas — ${formatearDinero(precio)}\n`;
+
+    }
+
+
+    /* CAVIAR */
+
+    if (
+        document.getElementById(
+            "caviar"
+        ).checked
+    ) {
+
+        const cantidad =
+            Math.min(
+                10,
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "cantidadCaviar"
+                        ).value
+                    ) || 1
+                )
+            );
+
+
+        const precio =
+            cantidad *
+            PRECIO_CAVIAR;
+
+
+        mensaje +=
+            `• ✨ Caviar — ${cantidad} uñas — ${formatearDinero(precio)}\n`;
+
+    }
+
+
+    /* RETIRO */
+
+    if (
+        document.getElementById(
+            "retiro"
+        ).checked
+    ) {
+
+        mensaje +=
+            `• 🧹 Retiro de otro lugar — ${formatearDinero(PRECIO_RETIRO)}\n`;
+
+    }
+
+
+    /* SPA */
+
+    if (
+        usuario.primeraCitaDisponible &&
+        !usuario.primeraCitaUsada
+    ) {
+
+        const spa =
+            document.getElementById(
+                "tipoSpa"
+            ).value;
+
+
+        mensaje +=
+            `• 🎁 SPA de primera cita: ${spa} — GRATIS\n`;
+
+    } else {
+
+        const spa =
+            document.getElementById(
+                "spaNormal"
+            ).value;
+
+
+        if (spa) {
+
+            mensaje +=
+                `• 🫧 SPA: ${spa} — ${formatearDinero(PRECIO_SPA)}\n`;
+
+        }
+
+    }
+
+
+    /* UBICACION */
+
+    mensaje +=
+        "\n📍 *LUGAR DE LA CITA*\n";
+
+
+    if (ubicacion === "Domicilio") {
+
+        const direccion =
+            document
+                .getElementById(
+                    "direccion"
+                )
+                .value
+                .trim();
+
+
+        mensaje +=
+            `🚗 Domicilio — ${formatearDinero(PRECIO_DOMICILIO)}\n`;
+
+        mensaje +=
+            `🏠 Dirección: ${direccion}\n`;
+
+    } else {
+
+        mensaje +=
+            "🏡 Estudio — Sin costo adicional\n";
+
+    }
+
+
+    /* FECHA */
+
+    mensaje +=
+        "\n📅 *FECHA Y HORA*\n";
+
+    mensaje +=
+        `📅 Fecha: ${fecha}\n`;
+
+    mensaje +=
+        `🕐 Hora: ${hora}\n`;
+
+
+    /* NOTA */
+
+    if (nota) {
+
+        mensaje +=
+            "\n📝 *NOTA*\n";
+
+        mensaje +=
+            `${nota}\n`;
+
+    }
+
+
+    /* TOTAL */
+
+    mensaje +=
+        "\n💰 *TOTAL ESTIMADO: " +
+        formatearDinero(total) +
         "*\n";
 
-    mensaje +=
-        "━━━━━━━━━━━━━━━━━━\n\n";
 
     mensaje +=
-        "🎀 ¡Gracias por elegir Morita Studio! 💅🏻✨";
+        "\n💗 Quedo atenta a la confirmación de mi cita. ¡Gracias! 🌸";
 
 
-    /* =========================
-       ABRIR WHATSAPP
-    ========================== */
+    /* MARCAR BENEFICIO COMO UTILIZADO */
+
+    if (
+        usuario.primeraCitaDisponible &&
+        !usuario.primeraCitaUsada
+    ) {
+
+        const spa =
+            document.getElementById(
+                "tipoSpa"
+            ).value;
+
+
+        if (spa) {
+
+            marcarPrimeraCitaComoUsada(
+                usuario.id
+            );
+
+        }
+
+    }
+
 
     const numero =
         "573053836192";
+
 
     const enlace =
         "https://wa.me/" +
         numero +
         "?text=" +
-        encodeURIComponent(mensaje);
+        encodeURIComponent(
+            mensaje
+        );
+
 
     window.open(
         enlace,
@@ -1073,41 +1918,325 @@ function abrirWhatsApp() {
 }
 
 
-/* =========================
-   FECHA MÍNIMA
-========================= */
+/* =====================================================
+   MARCAR PRIMERA CITA COMO USADA
+===================================================== */
+
+function marcarPrimeraCitaComoUsada(
+    idUsuario
+) {
+
+    const usuarios =
+        obtenerUsuarios();
+
+
+    const indice =
+        usuarios.findIndex(
+            usuario =>
+                usuario.id === idUsuario
+        );
+
+
+    if (indice === -1) {
+
+        return;
+
+    }
+
+
+    usuarios[indice]
+        .primeraCitaDisponible = false;
+
+
+    usuarios[indice]
+        .primeraCitaUsada = true;
+
+
+    guardarUsuarios(
+        usuarios
+    );
+
+
+    localStorage.setItem(
+        "moritaUsuarioActual",
+        JSON.stringify(
+            usuarios[indice]
+        )
+    );
+
+
+    actualizarBeneficio();
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function abrirModalLogin() {
+
+    const modal =
+        document.getElementById(
+            "modalLogin"
+        );
+
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function cerrarModalLogin() {
+
+    const modal =
+        document.getElementById(
+            "modalLogin"
+        );
+
+
+    modal.classList.add(
+        "hidden"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   ALTERNAR LOGIN / REGISTRO
+===================================================== */
+
+function alternarFormulario() {
+
+    const login =
+        document.getElementById(
+            "formLogin"
+        );
+
+
+    const registro =
+        document.getElementById(
+            "formRegistro"
+        );
+
+
+    const titulo =
+        document.getElementById(
+            "tituloModal"
+        );
+
+
+    const subtitulo =
+        document.getElementById(
+            "subtituloModal"
+        );
+
+
+    const texto =
+        document.getElementById(
+            "textoSwitch"
+        );
+
+
+    const boton =
+        document.getElementById(
+            "btnSwitch"
+        );
+
+
+    const mostrandoLogin =
+        !login.classList.contains(
+            "hidden"
+        );
+
+
+    if (mostrandoLogin) {
+
+        login.classList.add(
+            "hidden"
+        );
+
+        registro.classList.remove(
+            "hidden"
+        );
+
+
+        titulo.textContent =
+            "Crea tu cuenta 🌸";
+
+
+        subtitulo.textContent =
+            "Regístrate para reservar y recibir tu beneficio de bienvenida.";
+
+
+        texto.textContent =
+            "¿Ya tienes una cuenta?";
+
+
+        boton.textContent =
+            "Iniciar sesión";
+
+
+    } else {
+
+        registro.classList.add(
+            "hidden"
+        );
+
+        login.classList.remove(
+            "hidden"
+        );
+
+
+        titulo.textContent =
+            "Bienvenida a Morita Studio 💗";
+
+
+        subtitulo.textContent =
+            "Inicia sesión para reservar tu cita.";
+
+
+        texto.textContent =
+            "¿No tienes una cuenta?";
+
+
+        boton.textContent =
+            "Crear cuenta";
+
+    }
+
+}
+
+
+/* =====================================================
+   MENSAJES
+===================================================== */
+
+function mostrarMensajeExito(
+    mensaje
+) {
+
+    const error =
+        document.getElementById(
+            "mensajeError"
+        );
+
+
+    error.classList.remove(
+        "hidden"
+    );
+
+
+    error.style.background =
+        "#eefaf2";
+
+
+    error.style.color =
+        "#548466";
+
+
+    error.style.borderColor =
+        "#c6e7d0";
+
+
+    error.textContent =
+        mensaje;
+
+
+    setTimeout(() => {
+
+        ocultarError();
+
+    }, 4000);
+
+}
+
+
+function mostrarError(
+    mensaje
+) {
+
+    const error =
+        document.getElementById(
+            "mensajeError"
+        );
+
+
+    error.classList.remove(
+        "hidden"
+    );
+
+
+    error.style.background =
+        "#fff0f0";
+
+
+    error.style.color =
+        "#b44f62";
+
+
+    error.style.borderColor =
+        "#f2c3cc";
+
+
+    error.textContent =
+        mensaje;
+
+
+    error.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+function ocultarError() {
+
+    const error =
+        document.getElementById(
+            "mensajeError"
+        );
+
+
+    error.classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   CERRAR MODAL AL HACER CLICK AFUERA
+===================================================== */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+    "click",
+    function (event) {
 
-        const fecha =
-            document.getElementById("fecha");
+        const modal =
+            document.getElementById(
+                "modalLogin"
+            );
 
-        if (fecha) {
 
-            const hoy =
-                new Date();
+        if (
+            event.target === modal
+        ) {
 
-            const año =
-                hoy.getFullYear();
-
-            const mes =
-                String(
-                    hoy.getMonth() + 1
-                ).padStart(2, "0");
-
-            const dia =
-                String(
-                    hoy.getDate()
-                ).padStart(2, "0");
-
-            fecha.min =
-                `${año}-${mes}-${dia}`;
+            cerrarModalLogin();
 
         }
-
-        actualizarCotizacion();
 
     }
 );

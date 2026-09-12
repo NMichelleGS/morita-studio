@@ -1,22 +1,39 @@
-// BOTON PARA IR A CONTACTO
+// =====================================================
+// MORITA STUDIO
+// FUNCIONES
+// =====================================================
+
+
+// BOTÓN "RESERVAR MI CITA"
 
 function irContacto() {
 
-    document.getElementById("contacto").scrollIntoView();
+    const contacto = document.getElementById("contacto");
+
+    contacto.scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
 
-// BOTON DE WHATSAPP
+// =====================================================
+// BOTÓN DE WHATSAPP
+// =====================================================
 
 function abrirWhatsApp() {
 
-    var numero = "573053836192";
+    const numero = "573053836192";
 
-    var mensaje = "Hola Michelle 💗, quiero reservar una cita en Morita Studio.";
+    const mensaje =
+        "Hola Michelle 💗, quiero reservar una cita en Morita Studio. " +
+        "Me gustaría conocer la disponibilidad y los servicios.";
 
-    var enlace = "https://wa.me/" + numero +
-                 "?text=" + encodeURIComponent(mensaje);
+    const enlace =
+        "https://wa.me/" +
+        numero +
+        "?text=" +
+        encodeURIComponent(mensaje);
 
     window.open(enlace, "_blank");
 

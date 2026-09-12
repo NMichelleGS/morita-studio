@@ -2,246 +2,398 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Morita Studio</title>
+    <title>Morita Studio | Manicure y Pedicure</title>
 
     <link rel="stylesheet" href="manicurista.css">
-
 </head>
 
 <body>
 
-    <!-- ENCABEZADO -->
+    <!-- ==================== ENCABEZADO ==================== -->
 
     <header>
 
-        <h1>Morita Studio 💗</h1>
-
-        <p>Manicure y pedicure a domicilio</p>
+        <div class="logo">
+            <span>Morita</span>
+            <small>STUDIO</small>
+        </div>
 
         <nav>
-
             <a href="#inicio">Inicio</a>
-
             <a href="#servicios">Servicios</a>
-
             <a href="#sobre-mi">Sobre mí</a>
-
+            <a href="#domicilio">Domicilio</a>
             <a href="#contacto">Contacto</a>
-
         </nav>
 
     </header>
 
 
-    <!-- INICIO -->
+    <!-- ==================== INICIO ==================== -->
 
-    <section id="inicio">
+    <main>
 
-        <h2>Bienvenida a Morita Studio</h2>
+        <section id="inicio" class="hero">
 
-        <p>
-            Belleza, cuidado y relajación
-            directamente en la comodidad de tu hogar.
-        </p>
+            <div class="hero-text">
 
-        <p>
-            Soy Michelle y estoy aquí para consentirte. 💅
-        </p>
+                <p class="etiqueta">MANICURE · PEDICURE · SPA</p>
 
-        <button onclick="irContacto()">
-            Reservar mi cita
-        </button>
+                <h1>
+                    Tus uñas,<br>
+                    <span>tu momento.</span>
+                </h1>
 
-    </section>
+                <p class="descripcion">
+                    Belleza, cuidado y relajación directamente
+                    en la comodidad de tu hogar. 💗
+                </p>
 
+                <div class="botones">
 
-    <!-- SERVICIOS -->
+                    <button class="boton-principal" onclick="irContacto()">
+                        Reservar mi cita
+                    </button>
 
-    <section id="servicios">
+                    <a href="#servicios" class="boton-secundario">
+                        Ver servicios
+                    </a>
 
-        <h2>Mis servicios</h2>
+                </div>
 
-        <p>
-            Elige el servicio que más te guste
-            y disfruta de una experiencia especial.
-        </p>
-
-
-        <div class="servicios">
+            </div>
 
 
-            <div class="servicio">
+            <div class="hero-decoracion">
 
-                <h3>💅 Manicure tradicional</h3>
+                <div class="circulo">
+
+                    <div class="uñas-icono">
+                        💅
+                    </div>
+
+                </div>
+
+                <span class="decoracion decoracion-1">♡</span>
+                <span class="decoracion decoracion-2">✦</span>
+                <span class="decoracion decoracion-3">♡</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== FRASE ==================== -->
+
+        <section class="frase">
+
+            <p>
+                “Un pequeño detalle puede hacerte sentir increíble.”
+            </p>
+
+        </section>
+
+
+        <!-- ==================== SERVICIOS ==================== -->
+
+        <section id="servicios">
+
+            <div class="titulo-seccion">
+
+                <p class="etiqueta">LO QUE HAGO</p>
+
+                <h2>Mis servicios</h2>
 
                 <p>
-                    Cuidado y arreglo de tus manos
-                    y uñas.
+                    Todo lo necesario para cuidar y consentir
+                    tus manos y pies. ✨
                 </p>
 
             </div>
 
 
-            <div class="servicio">
+            <div class="servicios">
 
-                <h3>🦶 Pedicure tradicional</h3>
 
-                <p>
-                    Cuidado y arreglo de tus pies
-                    y uñas.
-                </p>
+                <!-- SERVICIO 1 -->
+
+                <article class="servicio">
+
+                    <div class="icono-servicio">
+                        💅
+                    </div>
+
+                    <h3>Manicure tradicional</h3>
+
+                    <p>
+                        Limpieza, cuidado y arreglo de tus uñas
+                        para lucir unas manos bonitas.
+                    </p>
+
+                    <strong>$17.000</strong>
+
+                </article>
+
+
+                <!-- SERVICIO 2 -->
+
+                <article class="servicio">
+
+                    <div class="icono-servicio">
+                        🦶
+                    </div>
+
+                    <h3>Pedicure tradicional</h3>
+
+                    <p>
+                        Cuidado y arreglo de tus pies y uñas
+                        para una experiencia de bienestar.
+                    </p>
+
+                    <strong>$20.000</strong>
+
+                </article>
+
+
+                <!-- SERVICIO 3 -->
+
+                <article class="servicio">
+
+                    <div class="icono-servicio">
+                        ✨
+                    </div>
+
+                    <h3>Semipermanente</h3>
+
+                    <p>
+                        Color y brillo para tus uñas con un
+                        acabado bonito y duradero.
+                    </p>
+
+                    <strong>Consulta disponibilidad</strong>
+
+                </article>
+
+
+                <!-- SERVICIO 4 -->
+
+                <article class="servicio">
+
+                    <div class="icono-servicio">
+                        💎
+                    </div>
+
+                    <h3>Soft Gel</h3>
+
+                    <p>
+                        Uñas con un acabado elegante y moderno
+                        para darle un toque especial a tus manos.
+                    </p>
+
+                    <strong>Consulta disponibilidad</strong>
+
+                </article>
 
             </div>
 
 
-            <div class="servicio">
+            <!-- ==================== SPA ==================== -->
 
-                <h3>✨ Semipermanente en manos</h3>
+            <div class="spa">
 
-                <p>
-                    Color y brillo para unas manos
-                    bonitas por más tiempo.
+                <div class="titulo-seccion">
+
+                    <p class="etiqueta">MOMENTO DE RELAJACIÓN</p>
+
+                    <h2>SPA adicional</h2>
+
+                    <p>
+                        Puedes complementar tu servicio con una
+                        experiencia especial de relajación. 🫧
+                    </p>
+
+                </div>
+
+
+                <div class="spa-grid">
+
+
+                    <div class="spa-card">
+
+                        <span>🍫</span>
+
+                        <h3>Chocolaterapia</h3>
+
+                        <p>
+                            Un momento dulce para consentirte.
+                        </p>
+
+                    </div>
+
+
+                    <div class="spa-card">
+
+                        <span>🕯️</span>
+
+                        <h3>Veloterapia</h3>
+
+                        <p>
+                            Relajación y cuidado en una experiencia especial.
+                        </p>
+
+                    </div>
+
+
+                    <div class="spa-card">
+
+                        <span>🫧</span>
+
+                        <h3>Jelly Spa</h3>
+
+                        <p>
+                            Una experiencia relajante para tus pies.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <p class="nota">
+                    ✦ Los servicios de SPA son adicionales y opcionales.
                 </p>
 
             </div>
 
-
-            <div class="servicio">
-
-                <h3>✨ Semipermanente en pies</h3>
-
-                <p>
-                    Dale un toque especial
-                    a tus pies.
-                </p>
-
-            </div>
+        </section>
 
 
-            <div class="servicio">
+        <!-- ==================== SOBRE MI ==================== -->
 
-                <h3>🍫 Chocolaterapia</h3>
+        <section id="sobre-mi" class="sobre-mi">
 
-                <p>
-                    Un momento de relajación
-                    y cuidado para consentirte.
-                </p>
+            <div class="sobre-contenido">
 
-            </div>
+                <div class="sobre-decoracion">
 
+                    <div class="sobre-circulo">
+                        M
+                    </div>
 
-            <div class="servicio">
-
-                <h3>🫧 Jelly Spa</h3>
-
-                <p>
-                    Una experiencia relajante
-                    para tus pies.
-                </p>
-
-            </div>
+                </div>
 
 
-            <div class="servicio">
+                <div class="sobre-texto">
 
-                <h3>🕯️ Veloterapia</h3>
+                    <p class="etiqueta">CONOCE MORITA STUDIO</p>
 
-                <p>
-                    Relájate y disfruta de un
-                    momento especial de cuidado.
-                </p>
+                    <h2>Hola, soy Michelle 💗</h2>
+
+                    <p>
+                        Soy la creadora de <strong>Morita Studio</strong>,
+                        un espacio pensado para cuidar tus uñas y
+                        regalarte un momento para ti.
+                    </p>
+
+                    <p>
+                        Me encanta aprender, crear diseños y cuidar
+                        cada detalle para que puedas disfrutar de
+                        una experiencia bonita y especial.
+                    </p>
+
+                    <p>
+                        Mi objetivo es que no solo salgas con unas
+                        uñas bonitas, sino también con un momento
+                        de relajación y bienestar.
+                    </p>
+
+                </div>
 
             </div>
 
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- SOBRE MI -->
+        <!-- ==================== DOMICILIO ==================== -->
 
-    <section id="sobre-mi">
+        <section id="domicilio" class="domicilio">
 
-        <h2>Sobre mí</h2>
+            <div class="domicilio-contenido">
 
-        <h3>Hola, soy Michelle 💗</h3>
+                <p class="etiqueta">MORITA STUDIO VA HASTA TI</p>
 
-        <p>
-            Soy la creadora de Morita Studio.
-        </p>
+                <h2>Tu cita, en la comodidad de tu hogar. 🏠</h2>
 
-        <p>
-            Me encanta cuidar de mis clientas y
-            crear momentos de belleza y relajación.
-        </p>
+                <p>
+                    Disfruta de tus servicios de manicure y pedicure
+                    sin tener que salir de casa.
+                </p>
 
-        <p>
-            Trabajo a domicilio para que puedas
-            disfrutar de tus servicios desde la
-            comodidad de tu hogar.
-        </p>
+                <div class="domicilio-datos">
 
-    </section>
+                    <div>
+                        <span>📍</span>
+                        <p>Servicio a domicilio<br><strong>Bogotá</strong></p>
+                    </div>
 
+                    <div>
+                        <span>💗</span>
+                        <p>Atención personalizada<br><strong>Para ti</strong></p>
+                    </div>
 
-    <!-- DOMICILIO -->
+                </div>
 
-    <section id="domicilio">
+            </div>
 
-        <h2>✨ Servicio a domicilio ✨</h2>
-
-        <p>
-            No necesitas salir de casa.
-        </p>
-
-        <p>
-            Yo llevo la experiencia de
-            Morita Studio hasta ti. 🏠💗
-        </p>
-
-    </section>
+        </section>
 
 
-    <!-- CONTACTO -->
+        <!-- ==================== CONTACTO ==================== -->
 
-    <section id="contacto">
+        <section id="contacto" class="contacto">
 
-        <h2>Reserva tu cita 💗</h2>
+            <p class="etiqueta">¿LISTA PARA CONSENTIRTE?</p>
 
-        <p>
-            ¿Quieres reservar un servicio?
-        </p>
+            <h2>Reserva tu cita 💗</h2>
 
-        <p>
-            Escríbeme por WhatsApp y
-            coordinamos tu cita.
-        </p>
+            <p>
+                Escríbeme por WhatsApp y coordinamos tu servicio.
+            </p>
 
-        <button onclick="abrirWhatsApp()">
+            <button class="boton-whatsapp" onclick="abrirWhatsApp()">
+                Reservar por WhatsApp 📱
+            </button>
 
-            Reservar por WhatsApp 📱
+            <p class="numero">
+                305 383 6192
+            </p>
 
-        </button>
+        </section>
 
-    </section>
+    </main>
 
 
-    <!-- PIE DE PAGINA -->
+    <!-- ==================== PIE DE PÁGINA ==================== -->
 
     <footer>
 
-        <h2>Morita Studio</h2>
+        <div class="footer-logo">
+
+            <span>Morita</span>
+
+            <small>STUDIO</small>
+
+        </div>
 
         <p>
-            Manicure y pedicure a domicilio 💗
+            Manicure · Pedicure · SPA
         </p>
 
-        <p>
-            © 2026 Morita Studio
+        <p class="copyright">
+            © 2026 Morita Studio · Todos los derechos reservados.
         </p>
 
     </footer>

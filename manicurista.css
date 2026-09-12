@@ -1,0 +1,221 @@
+/* TODA LA PAGINA */
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #fff5f7;
+
+    color: #4a3438;
+
+}
+
+
+/* ENCABEZADO */
+
+header {
+
+    background-color: #eebcc8;
+
+    text-align: center;
+
+    padding: 25px;
+
+}
+
+
+header h1 {
+
+    font-size: 35px;
+
+    margin: 5px;
+
+}
+
+
+header p {
+
+    font-size: 16px;
+
+}
+
+
+/* MENU */
+
+nav {
+
+    margin-top: 20px;
+
+}
+
+
+nav a {
+
+    text-decoration: none;
+
+    color: #4a3438;
+
+    margin: 10px;
+
+}
+
+
+nav a:hover {
+
+    color: white;
+
+}
+
+
+/* INICIO */
+
+#inicio {
+
+    text-align: center;
+
+    padding: 100px 20px;
+
+    background-color: #ffe4eb;
+
+}
+
+
+#inicio h2 {
+
+    font-size: 40px;
+
+}
+
+
+#inicio p {
+
+    font-size: 18px;
+
+}
+
+
+/* BOTONES */
+
+button {
+
+    background-color: #c9798b;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px 25px;
+
+    border-radius: 25px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+button:hover {
+
+    background-color: #a85d6d;
+
+}
+
+
+/* SECCIONES */
+
+section {
+
+    padding: 70px 20px;
+
+    text-align: center;
+
+}
+
+
+section h2 {
+
+    font-size: 32px;
+
+}
+
+
+/* SERVICIOS */
+
+.servicios {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+}
+
+
+.servicio {
+
+    background-color: white;
+
+    width: 250px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 3px 10px #ddd;
+
+}
+
+
+.servicio h3 {
+
+    color: #a85d6d;
+
+}
+
+
+/* SOBRE MI */
+
+#sobre-mi {
+
+    background-color: #f8dce2;
+
+}
+
+
+/* DOMICILIO */
+
+#domicilio {
+
+    background-color: #ffeef2;
+
+}
+
+
+/* CONTACTO */
+
+#contacto {
+
+    background-color: #f3c4ce;
+
+}
+
+
+/* PIE DE PAGINA */
+
+footer {
+
+    background-color: #4a3438;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 30px;
+
+}

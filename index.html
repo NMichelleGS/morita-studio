@@ -1,399 +1,907 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Morita Studio | Manicure y Pedicure</title>
+    <title>Morita Studio 💗 | Manicure & Pedicure</title>
 
     <link rel="stylesheet" href="manicurista.css">
 </head>
 
 <body>
 
-    <!-- ==================== ENCABEZADO ==================== -->
+    <!-- =========================
+         NAVEGACIÓN
+    ========================== -->
 
-    <header>
+    <header class="header">
 
         <div class="logo">
-            <span>Morita</span>
-            <small>STUDIO</small>
+            <span>🌸</span>
+            <h1>Morita Studio</h1>
         </div>
 
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#domicilio">Domicilio</a>
+            <a href="#reserva">Reservar</a>
             <a href="#contacto">Contacto</a>
         </nav>
 
     </header>
 
 
-    <!-- ==================== INICIO ==================== -->
+    <!-- =========================
+         INICIO
+    ========================== -->
 
-    <main>
+    <section id="inicio" class="hero">
 
-        <section id="inicio" class="hero">
+        <div class="hero-contenido">
 
-            <div class="hero-text">
+            <span class="decoracion">✨💅🏻✨</span>
 
-                <p class="etiqueta">MANICURE · PEDICURE · SPA</p>
-
-                <h1>
-                    Tus uñas,<br>
-                    <span>tu momento.</span>
-                </h1>
-
-                <p class="descripcion">
-                    Belleza, cuidado y relajación directamente
-                    en la comodidad de tu hogar. 💗
-                </p>
-
-                <div class="botones">
-
-                    <button class="boton-principal" onclick="irContacto()">
-                        Reservar mi cita
-                    </button>
-
-                    <a href="#servicios" class="boton-secundario">
-                        Ver servicios
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-decoracion">
-
-                <div class="circulo">
-
-                    <div class="uñas-icono">
-                        💅
-                    </div>
-
-                </div>
-
-                <span class="decoracion decoracion-1">♡</span>
-                <span class="decoracion decoracion-2">✦</span>
-                <span class="decoracion decoracion-3">♡</span>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==================== FRASE ==================== -->
-
-        <section class="frase">
+            <h2>Uñas bonitas,<br>momentos bonitos 💗</h2>
 
             <p>
-                “Un pequeño detalle puede hacerte sentir increíble.”
+                Bienvenida a <strong>Morita Studio</strong> 🌸
+                Un espacio creado para consentirte, cuidar tus uñas
+                y hacerte sentir increíble. 🎀
             </p>
 
-        </section>
+            <button onclick="irServicios()" class="btn-principal">
+                💅🏻 Ver servicios
+            </button>
+
+        </div>
+
+        <div class="hero-corazon">
+            💗
+        </div>
+
+    </section>
 
 
-        <!-- ==================== SERVICIOS ==================== -->
+    <!-- =========================
+         SERVICIOS
+    ========================== -->
 
-        <section id="servicios">
+    <section id="servicios" class="seccion">
 
-            <div class="titulo-seccion">
+        <div class="titulo-seccion">
 
-                <p class="etiqueta">LO QUE HAGO</p>
+            <span>🌷</span>
 
-                <h2>Mis servicios</h2>
+            <h2>Elige tus servicios</h2>
+
+            <p>
+                Puedes escoger uno o varios servicios para crear
+                tu cita personalizada. 💅🏻✨
+            </p>
+
+        </div>
+
+
+        <div class="servicios-grid">
+
+
+            <!-- MANOS TRADICIONAL -->
+
+            <label class="servicio-card">
+
+                <input
+                    type="checkbox"
+                    class="servicio"
+                    value="Manos tradicional"
+                    data-precio="18000"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <div class="check">✓</div>
+
+                <div class="servicio-icono">🌸</div>
+
+                <h3>Manos tradicional</h3>
 
                 <p>
-                    Todo lo necesario para cuidar y consentir
-                    tus manos y pies. ✨
+                    Manicure tradicional para unas manos
+                    lindas y cuidadas. 💗
                 </p>
 
+                <strong>$18.000</strong>
+
+            </label>
+
+
+            <!-- PIES TRADICIONAL -->
+
+            <label class="servicio-card">
+
+                <input
+                    type="checkbox"
+                    class="servicio"
+                    value="Pies tradicional"
+                    data-precio="25000"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <div class="check">✓</div>
+
+                <div class="servicio-icono">🦶🏻</div>
+
+                <h3>Pies tradicional</h3>
+
+                <p>
+                    Cuidado y embellecimiento de tus pies. 🌸
+                </p>
+
+                <strong>$25.000</strong>
+
+            </label>
+
+
+            <!-- SEMIPERMANENTE MANOS -->
+
+            <label class="servicio-card">
+
+                <input
+                    type="checkbox"
+                    class="servicio"
+                    value="Manos semipermanente"
+                    data-precio="40000"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <div class="check">✓</div>
+
+                <div class="servicio-icono">💖</div>
+
+                <h3>Manos semipermanente</h3>
+
+                <p>
+                    Color hermoso y acabado duradero. ✨
+                </p>
+
+                <strong>$40.000</strong>
+
+            </label>
+
+
+            <!-- SEMIPERMANENTE PIES -->
+
+            <label class="servicio-card">
+
+                <input
+                    type="checkbox"
+                    class="servicio"
+                    value="Pies semipermanente"
+                    data-precio="45000"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <div class="check">✓</div>
+
+                <div class="servicio-icono">🦶🏻💖</div>
+
+                <h3>Pies semipermanente</h3>
+
+                <p>
+                    Pedicure con acabado semipermanente. ✨
+                </p>
+
+                <strong>$45.000</strong>
+
+            </label>
+
+
+            <!-- SOFT GEL -->
+
+            <label class="servicio-card">
+
+                <input
+                    type="checkbox"
+                    class="servicio"
+                    value="Soft Gel"
+                    data-precio="70000"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <div class="check">✓</div>
+
+                <div class="servicio-icono">💅🏻✨</div>
+
+                <h3>Soft Gel</h3>
+
+                <p>
+                    Extensión elegante para lucir uñas increíbles. 🎀
+                </p>
+
+                <strong>$70.000</strong>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PERSONALIZACIÓN
+    ========================== -->
+
+    <section id="personalizacion" class="seccion personalizacion">
+
+        <div class="titulo-seccion">
+
+            <span>🎀</span>
+
+            <h2>Personaliza tus uñas</h2>
+
+            <p>
+                Agrega los detalles que quieras a tu servicio. ✨
+            </p>
+
+        </div>
+
+
+        <!-- FRANCES -->
+
+        <div class="opcion-box">
+
+            <div class="opcion-titulo">
+
+                <div>
+                    <span class="opcion-emoji">🤍</span>
+
+                    <div>
+                        <h3>Frances</h3>
+                        <p>Adicional de $5.000</p>
+                    </div>
+                </div>
+
+                <label class="switch">
+                    <input
+                        type="checkbox"
+                        id="frances"
+                        onchange="mostrarFrances()"
+                    >
+                    <span></span>
+                </label>
+
             </div>
 
 
-            <div class="servicios">
+            <div id="francesOpciones" class="opciones-extra oculto">
+
+                <label>
+                    Tipo de frances
+                    <select id="tipoFrances" onchange="actualizarCotizacion()">
+
+                        <option value="Frances clásico">
+                            🤍 Frances clásico
+                        </option>
+
+                        <option value="Frances diagonal">
+                            ✨ Frances diagonal
+                        </option>
+
+                        <option value="Frances doble">
+                            💕 Frances doble
+                        </option>
+
+                        <option value="Frances de colores">
+                            🌈 Frances de colores
+                        </option>
+
+                        <option value="Frances creativo">
+                            🎀 Frances creativo
+                        </option>
+
+                    </select>
+                </label>
 
 
-                <!-- SERVICIO 1 -->
+                <label>
+                    ¿Cuántas uñas llevan frances?
 
-                <article class="servicio">
+                    <input
+                        type="number"
+                        id="cantidadFrances"
+                        min="1"
+                        max="10"
+                        value="10"
+                        onchange="actualizarCotizacion()"
+                    >
 
-                    <div class="icono-servicio">
-                        💅
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISEÑO -->
+
+        <div class="opcion-box">
+
+            <div class="opcion-titulo">
+
+                <div>
+                    <span class="opcion-emoji">🎨</span>
+
+                    <div>
+                        <h3>Diseño elaborado</h3>
+                        <p>Adicional de $5.000</p>
                     </div>
+                </div>
 
-                    <h3>Manicure tradicional</h3>
+                <label class="switch">
 
-                    <p>
-                        Limpieza, cuidado y arreglo de tus uñas
-                        para lucir unas manos bonitas.
-                    </p>
+                    <input
+                        type="checkbox"
+                        id="diseno"
+                        onchange="actualizarCotizacion()"
+                    >
 
-                    <strong>$17.000</strong>
+                    <span></span>
 
-                </article>
+                </label>
+
+            </div>
+
+            <p class="texto-ayuda">
+                ✨ Para diseños más elaborados se agrega un adicional
+                de $5.000.
+            </p>
+
+        </div>
 
 
-                <!-- SERVICIO 2 -->
+        <!-- PIEDRERÍA -->
 
-                <article class="servicio">
+        <div class="opcion-box">
 
-                    <div class="icono-servicio">
-                        🦶
+            <div class="opcion-titulo">
+
+                <div>
+                    <span class="opcion-emoji">💎</span>
+
+                    <div>
+                        <h3>Piedrería</h3>
+                        <p>$500 por pepita</p>
                     </div>
+                </div>
 
-                    <h3>Pedicure tradicional</h3>
+                <label class="switch">
 
-                    <p>
-                        Cuidado y arreglo de tus pies y uñas
-                        para una experiencia de bienestar.
-                    </p>
+                    <input
+                        type="checkbox"
+                        id="piedreria"
+                        onchange="mostrarPiedreria()"
+                    >
 
-                    <strong>$20.000</strong>
+                    <span></span>
 
-                </article>
-
-
-                <!-- SERVICIO 3 -->
-
-                <article class="servicio">
-
-                    <div class="icono-servicio">
-                        ✨
-                    </div>
-
-                    <h3>Semipermanente</h3>
-
-                    <p>
-                        Color y brillo para tus uñas con un
-                        acabado bonito y duradero.
-                    </p>
-
-                    <strong>Consulta disponibilidad</strong>
-
-                </article>
-
-
-                <!-- SERVICIO 4 -->
-
-                <article class="servicio">
-
-                    <div class="icono-servicio">
-                        💎
-                    </div>
-
-                    <h3>Soft Gel</h3>
-
-                    <p>
-                        Uñas con un acabado elegante y moderno
-                        para darle un toque especial a tus manos.
-                    </p>
-
-                    <strong>Consulta disponibilidad</strong>
-
-                </article>
+                </label>
 
             </div>
 
 
-            <!-- ==================== SPA ==================== -->
+            <div id="piedreriaOpciones" class="opciones-extra oculto">
 
-            <div class="spa">
+                <label>
+                    Tipo de piedrería
 
-                <div class="titulo-seccion">
+                    <select
+                        id="tipoPiedreria"
+                        onchange="actualizarCotizacion()"
+                    >
 
-                    <p class="etiqueta">MOMENTO DE RELAJACIÓN</p>
+                        <option value="Cristales">
+                            💎 Cristales
+                        </option>
 
-                    <h2>SPA adicional</h2>
+                        <option value="Perlas">
+                            🤍 Perlas
+                        </option>
 
-                    <p>
-                        Puedes complementar tu servicio con una
-                        experiencia especial de relajación. 🫧
-                    </p>
+                        <option value="Charms">
+                            ✨ Charms
+                        </option>
+
+                        <option value="Swarovski">
+                            💎 Swarovski
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+                    Cantidad de pepitas
+
+                    <input
+                        type="number"
+                        id="cantidadPiedreria"
+                        min="1"
+                        value="1"
+                        onchange="actualizarCotizacion()"
+                    >
+
+                </label>
+
+
+                <div class="caviar">
+
+                    <label class="checkbox-line">
+
+                        <input
+                            type="checkbox"
+                            id="caviar"
+                            onchange="mostrarCaviar()"
+                        >
+
+                        🫧 También quiero caviar
+
+                    </label>
+
+
+                    <div id="caviarOpciones" class="oculto">
+
+                        <label>
+                            Cantidad de uñas con caviar
+
+                            <input
+                                type="number"
+                                id="cantidadCaviar"
+                                min="1"
+                                max="10"
+                                value="1"
+                                onchange="actualizarCotizacion()"
+                            >
+
+                        </label>
+
+                        <small>
+                            🫧 $200 por uña
+                        </small>
+
+                    </div>
 
                 </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RETIRO -->
+
+        <div class="opcion-box">
+
+            <div class="opcion-titulo">
+
+                <div>
+
+                    <span class="opcion-emoji">♻️</span>
+
+                    <div>
+
+                        <h3>¿Tienes un sistema de otro lugar?</h3>
+
+                        <p>
+                            Retiro adicional: $7.000
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="retiro"
+                        onchange="actualizarCotizacion()"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+            <p class="texto-ayuda">
+                💗 Si traes un sistema realizado en otro lugar,
+                se adiciona el valor del retiro.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRIMERA VISITA
+    ========================== -->
+
+    <section class="seccion regalo">
+
+        <div class="titulo-seccion">
+
+            <span>🎁</span>
+
+            <h2>Un regalito para ti 💗</h2>
+
+            <p>
+                Si es tu primera vez con nosotros,
+                queremos consentirte. 🎀
+            </p>
+
+        </div>
+
+
+        <div class="primera-visita">
+
+            <h3>¿Es tu primera cita en Morita Studio? 🌸</h3>
+
+
+            <div class="radio-grupo">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="primera"
+                        value="si"
+                        onchange="mostrarRegalo()"
+                    >
+
+                    🎀 Sí, es mi primera vez
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="primera"
+                        value="no"
+                        checked
+                        onchange="mostrarRegalo()"
+                    >
+
+                    💅🏻 No, ya me he atendido antes
+
+                </label>
+
+            </div>
+
+
+            <div id="regaloOpciones" class="regalo-opciones oculto">
+
+                <h3>🎁 ¡Escoge tu SPA GRATIS!</h3>
+
+                <p>
+                    Por ser tu primera cita puedes escoger
+                    uno de estos regalitos. 💗✨
+                </p>
 
 
                 <div class="spa-grid">
 
+                    <label class="spa-card">
 
-                    <div class="spa-card">
+                        <input
+                            type="radio"
+                            name="spa"
+                            value="Chocolaterapia 🍫"
+                            onchange="actualizarCotizacion()"
+                        >
 
                         <span>🍫</span>
 
-                        <h3>Chocolaterapia</h3>
+                        <strong>Chocolaterapia</strong>
 
-                        <p>
-                            Un momento dulce para consentirte.
-                        </p>
+                        <small>GRATIS 🎁</small>
 
-                    </div>
+                    </label>
 
 
-                    <div class="spa-card">
+                    <label class="spa-card">
+
+                        <input
+                            type="radio"
+                            name="spa"
+                            value="Veloterapia 🕯️"
+                            onchange="actualizarCotizacion()"
+                        >
 
                         <span>🕯️</span>
 
-                        <h3>Veloterapia</h3>
+                        <strong>Veloterapia</strong>
 
-                        <p>
-                            Relajación y cuidado en una experiencia especial.
-                        </p>
+                        <small>GRATIS 🎁</small>
 
-                    </div>
+                    </label>
 
 
-                    <div class="spa-card">
+                    <label class="spa-card">
+
+                        <input
+                            type="radio"
+                            name="spa"
+                            value="Jelly Spa 🫧"
+                            onchange="actualizarCotizacion()"
+                        >
 
                         <span>🫧</span>
 
-                        <h3>Jelly Spa</h3>
+                        <strong>Jelly Spa</strong>
 
-                        <p>
-                            Una experiencia relajante para tus pies.
-                        </p>
+                        <small>GRATIS 🎁</small>
 
-                    </div>
-
-                </div>
-
-
-                <p class="nota">
-                    ✦ Los servicios de SPA son adicionales y opcionales.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==================== SOBRE MI ==================== -->
-
-        <section id="sobre-mi" class="sobre-mi">
-
-            <div class="sobre-contenido">
-
-                <div class="sobre-decoracion">
-
-                    <div class="sobre-circulo">
-                        M
-                    </div>
-
-                </div>
-
-
-                <div class="sobre-texto">
-
-                    <p class="etiqueta">CONOCE MORITA STUDIO</p>
-
-                    <h2>Hola, soy Michelle 💗</h2>
-
-                    <p>
-                        Soy la creadora de <strong>Morita Studio</strong>,
-                        un espacio pensado para cuidar tus uñas y
-                        regalarte un momento para ti.
-                    </p>
-
-                    <p>
-                        Me encanta aprender, crear diseños y cuidar
-                        cada detalle para que puedas disfrutar de
-                        una experiencia bonita y especial.
-                    </p>
-
-                    <p>
-                        Mi objetivo es que no solo salgas con unas
-                        uñas bonitas, sino también con un momento
-                        de relajación y bienestar.
-                    </p>
+                    </label>
 
                 </div>
 
             </div>
-
-        </section>
-
-
-        <!-- ==================== DOMICILIO ==================== -->
-
-        <section id="domicilio" class="domicilio">
-
-            <div class="domicilio-contenido">
-
-                <p class="etiqueta">MORITA STUDIO VA HASTA TI</p>
-
-                <h2>Tu cita, en la comodidad de tu hogar. 🏠</h2>
-
-                <p>
-                    Disfruta de tus servicios de manicure y pedicure
-                    sin tener que salir de casa.
-                </p>
-
-                <div class="domicilio-datos">
-
-                    <div>
-                        <span>📍</span>
-                        <p>Servicio a domicilio<br><strong>Bogotá</strong></p>
-                    </div>
-
-                    <div>
-                        <span>💗</span>
-                        <p>Atención personalizada<br><strong>Para ti</strong></p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==================== CONTACTO ==================== -->
-
-        <section id="contacto" class="contacto">
-
-            <p class="etiqueta">¿LISTA PARA CONSENTIRTE?</p>
-
-            <h2>Reserva tu cita 💗</h2>
-
-            <p>
-                Escríbeme por WhatsApp y coordinamos tu servicio.
-            </p>
-
-            <button class="boton-whatsapp" onclick="abrirWhatsApp()">
-                Reservar por WhatsApp 📱
-            </button>
-
-            <p class="numero">
-                305 383 6192
-            </p>
-
-        </section>
-
-    </main>
-
-
-    <!-- ==================== PIE DE PÁGINA ==================== -->
-
-    <footer>
-
-        <div class="footer-logo">
-
-            <span>Morita</span>
-
-            <small>STUDIO</small>
 
         </div>
 
-        <p>
-            Manicure · Pedicure · SPA
+    </section>
+
+
+    <!-- =========================
+         DOMICILIO
+    ========================== -->
+
+    <section class="seccion">
+
+        <div class="titulo-seccion">
+
+            <span>🏠</span>
+
+            <h2>¿Dónde quieres tu cita?</h2>
+
+        </div>
+
+
+        <div class="ubicacion-grid">
+
+            <label class="ubicacion-card">
+
+                <input
+                    type="radio"
+                    name="ubicacion"
+                    value="Morita Studio"
+                    data-precio="0"
+                    checked
+                    onchange="actualizarCotizacion()"
+                >
+
+                <span>🌸</span>
+
+                <strong>Morita Studio</strong>
+
+                <small>Sin adicional</small>
+
+            </label>
+
+
+            <label class="ubicacion-card">
+
+                <input
+                    type="radio"
+                    name="ubicacion"
+                    value="Domicilio"
+                    data-precio="7100"
+                    onchange="actualizarCotizacion()"
+                >
+
+                <span>🏠</span>
+
+                <strong>A domicilio</strong>
+
+                <small>+$7.100</small>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DATOS DE CLIENTA
+    ========================== -->
+
+    <section id="reserva" class="seccion reserva">
+
+        <div class="titulo-seccion">
+
+            <span>📅</span>
+
+            <h2>Datos de tu reserva</h2>
+
+            <p>
+                Cuéntanos cuándo quieres tu cita. 💗
+            </p>
+
+        </div>
+
+
+        <div class="formulario">
+
+            <div class="campo">
+
+                <label for="nombre">
+                    👩🏻 Tu nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Escribe tu nombre"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="telefono">
+                    📱 Tu teléfono
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefono"
+                    placeholder="Ej: 305 383 6192"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="fecha">
+                    📅 Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="hora">
+                    🕐 Hora
+                </label>
+
+                <input
+                    type="time"
+                    id="hora"
+                >
+
+            </div>
+
+
+            <div class="campo campo-completo">
+
+                <label for="nota">
+                    💬 ¿Quieres contarnos algo?
+                </label>
+
+                <textarea
+                    id="nota"
+                    rows="4"
+                    placeholder="Ej: Quiero un diseño rosado, uñas largas, etc. 🎀"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESUMEN
+    ========================== -->
+
+    <section class="seccion resumen-seccion">
+
+        <div class="titulo-seccion">
+
+            <span>🛍️</span>
+
+            <h2>Resumen de tu cita</h2>
+
+            <p>
+                Revisa todo antes de enviarnos tu reserva. 💗
+            </p>
+
+        </div>
+
+
+        <div class="resumen">
+
+            <div id="resumenContenido">
+
+                <p class="vacio">
+                    💅🏻 Selecciona algún servicio para comenzar.
+                </p>
+
+            </div>
+
+
+            <div class="total">
+
+                <span>💗 Total a pagar</span>
+
+                <strong id="total">
+                    $0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            onclick="abrirWhatsApp()"
+            class="btn-whatsapp"
+        >
+            💚 Reservar por WhatsApp
+        </button>
+
+
+        <p class="mensaje-final">
+            📲 Al continuar, se abrirá WhatsApp con todos los
+            detalles de tu reserva. ✨
         </p>
 
-        <p class="copyright">
-            © 2026 Morita Studio · Todos los derechos reservados.
+    </section>
+
+
+    <!-- =========================
+         CONTACTO
+    ========================== -->
+
+    <section id="contacto" class="contacto">
+
+        <div>
+
+            <span>🌸</span>
+
+            <h2>Morita Studio 💗</h2>
+
+            <p>
+                Gracias por elegirnos para consentir tus uñas. 💅🏻✨
+            </p>
+
+            <p class="telefono">
+                📱 305 383 6192
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            Hecho con 💗✨ por Morita Studio
         </p>
 
     </footer>
@@ -402,5 +910,4 @@
     <script src="manicurista.js"></script>
 
 </body>
-
 </html>

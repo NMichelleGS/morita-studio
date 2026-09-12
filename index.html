@@ -4,907 +4,1138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Morita Studio 💗 | Manicure & Pedicure</title>
+    <title>Morita Studio | Uñas bonitas, momentos bonitos 💗</title>
 
     <link rel="stylesheet" href="manicurista.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVEGACIÓN
-    ========================== -->
+    <!-- ================= HEADER ================= -->
 
     <header class="header">
 
         <div class="logo">
-            <span>🌸</span>
-            <h1>Morita Studio</h1>
+            🌸 <span>Morita Studio</span>
         </div>
 
-        <nav>
+        <nav class="nav" id="navMenu">
             <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
-            <a href="#reserva">Reservar</a>
+            <a href="#reservar">Reservar</a>
             <a href="#contacto">Contacto</a>
         </nav>
 
-    </header>
+        <div class="header-actions">
 
+            <div id="usuarioHeader" class="usuario-header hidden">
+                <span id="nombreUsuarioHeader"></span>
+                <button type="button" onclick="cerrarSesion()">
+                    Salir
+                </button>
+            </div>
 
-    <!-- =========================
-         INICIO
-    ========================== -->
+            <button
+                type="button"
+                class="btn-login"
+                id="btnAbrirLogin"
+                onclick="abrirModalLogin()">
+                🔐 Iniciar sesión
+            </button>
 
-    <section id="inicio" class="hero">
-
-        <div class="hero-contenido">
-
-            <span class="decoracion">✨💅🏻✨</span>
-
-            <h2>Uñas bonitas,<br>momentos bonitos 💗</h2>
-
-            <p>
-                Bienvenida a <strong>Morita Studio</strong> 🌸
-                Un espacio creado para consentirte, cuidar tus uñas
-                y hacerte sentir increíble. 🎀
-            </p>
-
-            <button onclick="irServicios()" class="btn-principal">
-                💅🏻 Ver servicios
+            <button
+                type="button"
+                class="menu-btn"
+                onclick="alternarMenu()">
+                ☰
             </button>
 
         </div>
 
-        <div class="hero-corazon">
-            💗
-        </div>
-
-    </section>
+    </header>
 
 
-    <!-- =========================
-         SERVICIOS
-    ========================== -->
+    <!-- ================= INICIO ================= -->
 
-    <section id="servicios" class="seccion">
+    <main>
 
-        <div class="titulo-seccion">
+        <section class="hero" id="inicio">
 
-            <span>🌷</span>
+            <div class="hero-content">
 
-            <h2>Elige tus servicios</h2>
+                <span class="hero-tag">
+                    💅 Nail Studio
+                </span>
 
-            <p>
-                Puedes escoger uno o varios servicios para crear
-                tu cita personalizada. 💅🏻✨
-            </p>
-
-        </div>
-
-
-        <div class="servicios-grid">
-
-
-            <!-- MANOS TRADICIONAL -->
-
-            <label class="servicio-card">
-
-                <input
-                    type="checkbox"
-                    class="servicio"
-                    value="Manos tradicional"
-                    data-precio="18000"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <div class="check">✓</div>
-
-                <div class="servicio-icono">🌸</div>
-
-                <h3>Manos tradicional</h3>
+                <h1>
+                    Uñas bonitas,<br>
+                    <span>momentos bonitos</span> 💗
+                </h1>
 
                 <p>
-                    Manicure tradicional para unas manos
-                    lindas y cuidadas. 💗
+                    Dale a tus manos y pies el cuidado que merecen
+                    con un toque especial de Morita Studio. 🌷
                 </p>
 
-                <strong>$18.000</strong>
+                <div class="hero-buttons">
 
-            </label>
+                    <button
+                        type="button"
+                        class="btn-primary"
+                        onclick="irReservar()">
+                        Reservar mi cita 💅
+                    </button>
 
+                    <a href="#servicios" class="btn-secondary">
+                        Ver servicios
+                    </a>
 
-            <!-- PIES TRADICIONAL -->
-
-            <label class="servicio-card">
-
-                <input
-                    type="checkbox"
-                    class="servicio"
-                    value="Pies tradicional"
-                    data-precio="25000"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <div class="check">✓</div>
-
-                <div class="servicio-icono">🦶🏻</div>
-
-                <h3>Pies tradicional</h3>
-
-                <p>
-                    Cuidado y embellecimiento de tus pies. 🌸
-                </p>
-
-                <strong>$25.000</strong>
-
-            </label>
-
-
-            <!-- SEMIPERMANENTE MANOS -->
-
-            <label class="servicio-card">
-
-                <input
-                    type="checkbox"
-                    class="servicio"
-                    value="Manos semipermanente"
-                    data-precio="40000"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <div class="check">✓</div>
-
-                <div class="servicio-icono">💖</div>
-
-                <h3>Manos semipermanente</h3>
-
-                <p>
-                    Color hermoso y acabado duradero. ✨
-                </p>
-
-                <strong>$40.000</strong>
-
-            </label>
-
-
-            <!-- SEMIPERMANENTE PIES -->
-
-            <label class="servicio-card">
-
-                <input
-                    type="checkbox"
-                    class="servicio"
-                    value="Pies semipermanente"
-                    data-precio="45000"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <div class="check">✓</div>
-
-                <div class="servicio-icono">🦶🏻💖</div>
-
-                <h3>Pies semipermanente</h3>
-
-                <p>
-                    Pedicure con acabado semipermanente. ✨
-                </p>
-
-                <strong>$45.000</strong>
-
-            </label>
-
-
-            <!-- SOFT GEL -->
-
-            <label class="servicio-card">
-
-                <input
-                    type="checkbox"
-                    class="servicio"
-                    value="Soft Gel"
-                    data-precio="70000"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <div class="check">✓</div>
-
-                <div class="servicio-icono">💅🏻✨</div>
-
-                <h3>Soft Gel</h3>
-
-                <p>
-                    Extensión elegante para lucir uñas increíbles. 🎀
-                </p>
-
-                <strong>$70.000</strong>
-
-            </label>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         PERSONALIZACIÓN
-    ========================== -->
-
-    <section id="personalizacion" class="seccion personalizacion">
-
-        <div class="titulo-seccion">
-
-            <span>🎀</span>
-
-            <h2>Personaliza tus uñas</h2>
-
-            <p>
-                Agrega los detalles que quieras a tu servicio. ✨
-            </p>
-
-        </div>
-
-
-        <!-- FRANCES -->
-
-        <div class="opcion-box">
-
-            <div class="opcion-titulo">
-
-                <div>
-                    <span class="opcion-emoji">🤍</span>
-
-                    <div>
-                        <h3>Frances</h3>
-                        <p>Adicional de $5.000</p>
-                    </div>
                 </div>
 
-                <label class="switch">
-                    <input
-                        type="checkbox"
-                        id="frances"
-                        onchange="mostrarFrances()"
-                    >
-                    <span></span>
-                </label>
+            </div>
+
+            <div class="hero-decoration">
+                🌸
+                <span>✨</span>
+                💗
+            </div>
+
+        </section>
+
+
+        <!-- ================= SERVICIOS ================= -->
+
+        <section class="section" id="servicios">
+
+            <div class="section-title">
+
+                <span>✨ Nuestros servicios</span>
+
+                <h2>
+                    Elige tu favorito 💅
+                </h2>
+
+                <p>
+                    Puedes seleccionar uno o varios servicios
+                    para crear tu cita personalizada.
+                </p>
 
             </div>
 
 
-            <div id="francesOpciones" class="opciones-extra oculto">
+            <div class="services-grid">
 
-                <label>
-                    Tipo de frances
-                    <select id="tipoFrances" onchange="actualizarCotizacion()">
-
-                        <option value="Frances clásico">
-                            🤍 Frances clásico
-                        </option>
-
-                        <option value="Frances diagonal">
-                            ✨ Frances diagonal
-                        </option>
-
-                        <option value="Frances doble">
-                            💕 Frances doble
-                        </option>
-
-                        <option value="Frances de colores">
-                            🌈 Frances de colores
-                        </option>
-
-                        <option value="Frances creativo">
-                            🎀 Frances creativo
-                        </option>
-
-                    </select>
-                </label>
-
-
-                <label>
-                    ¿Cuántas uñas llevan frances?
-
-                    <input
-                        type="number"
-                        id="cantidadFrances"
-                        min="1"
-                        max="10"
-                        value="10"
-                        onchange="actualizarCotizacion()"
-                    >
-
-                </label>
-
-            </div>
-
-        </div>
-
-
-        <!-- DISEÑO -->
-
-        <div class="opcion-box">
-
-            <div class="opcion-titulo">
-
-                <div>
-                    <span class="opcion-emoji">🎨</span>
-
-                    <div>
-                        <h3>Diseño elaborado</h3>
-                        <p>Adicional de $5.000</p>
-                    </div>
-                </div>
-
-                <label class="switch">
+                <label class="service-card">
 
                     <input
                         type="checkbox"
-                        id="diseno"
-                        onchange="actualizarCotizacion()"
-                    >
+                        class="servicio"
+                        value="Manos tradicional"
+                        data-precio="18000">
 
-                    <span></span>
+                    <div class="service-icon">
+                        💅
+                    </div>
+
+                    <h3>Manos tradicional</h3>
+
+                    <p>
+                        Manicure tradicional para unas manos
+                        lindas y cuidadas.
+                    </p>
+
+                    <strong>$18.000</strong>
 
                 </label>
 
-            </div>
 
-            <p class="texto-ayuda">
-                ✨ Para diseños más elaborados se agrega un adicional
-                de $5.000.
-            </p>
-
-        </div>
-
-
-        <!-- PIEDRERÍA -->
-
-        <div class="opcion-box">
-
-            <div class="opcion-titulo">
-
-                <div>
-                    <span class="opcion-emoji">💎</span>
-
-                    <div>
-                        <h3>Piedrería</h3>
-                        <p>$500 por pepita</p>
-                    </div>
-                </div>
-
-                <label class="switch">
+                <label class="service-card">
 
                     <input
                         type="checkbox"
-                        id="piedreria"
-                        onchange="mostrarPiedreria()"
-                    >
+                        class="servicio"
+                        value="Pies tradicional"
+                        data-precio="25000">
 
-                    <span></span>
+                    <div class="service-icon">
+                        🦶
+                    </div>
+
+                    <h3>Pies tradicional</h3>
+
+                    <p>
+                        Cuidado y embellecimiento para tus pies.
+                    </p>
+
+                    <strong>$25.000</strong>
+
+                </label>
+
+
+                <label class="service-card">
+
+                    <input
+                        type="checkbox"
+                        class="servicio"
+                        value="Manos semipermanente"
+                        data-precio="40000">
+
+                    <div class="service-icon">
+                        💖
+                    </div>
+
+                    <h3>Manos semipermanente</h3>
+
+                    <p>
+                        Color hermoso y duradero para tus manos.
+                    </p>
+
+                    <strong>$40.000</strong>
+
+                </label>
+
+
+                <label class="service-card">
+
+                    <input
+                        type="checkbox"
+                        class="servicio"
+                        value="Pies semipermanente"
+                        data-precio="45000">
+
+                    <div class="service-icon">
+                        🌷
+                    </div>
+
+                    <h3>Pies semipermanente</h3>
+
+                    <p>
+                        Color duradero y acabado bonito.
+                    </p>
+
+                    <strong>$45.000</strong>
+
+                </label>
+
+
+                <label class="service-card service-card-special">
+
+                    <input
+                        type="checkbox"
+                        class="servicio"
+                        value="Soft Gel"
+                        data-precio="70000">
+
+                    <div class="service-icon">
+                        💎
+                    </div>
+
+                    <h3>Soft Gel</h3>
+
+                    <p>
+                        Uñas resistentes, elegantes y personalizadas.
+                    </p>
+
+                    <strong>$70.000</strong>
 
                 </label>
 
             </div>
 
-
-            <div id="piedreriaOpciones" class="opciones-extra oculto">
-
-                <label>
-                    Tipo de piedrería
-
-                    <select
-                        id="tipoPiedreria"
-                        onchange="actualizarCotizacion()"
-                    >
-
-                        <option value="Cristales">
-                            💎 Cristales
-                        </option>
-
-                        <option value="Perlas">
-                            🤍 Perlas
-                        </option>
-
-                        <option value="Charms">
-                            ✨ Charms
-                        </option>
-
-                        <option value="Swarovski">
-                            💎 Swarovski
-                        </option>
-
-                    </select>
-
-                </label>
+        </section>
 
 
-                <label>
-                    Cantidad de pepitas
+        <!-- ================= RESERVAR ================= -->
 
-                    <input
-                        type="number"
-                        id="cantidadPiedreria"
-                        min="1"
-                        value="1"
-                        onchange="actualizarCotizacion()"
-                    >
+        <section class="section booking-section" id="reservar">
 
-                </label>
+            <div class="section-title">
 
+                <span>🌸 Personaliza tu cita</span>
 
-                <div class="caviar">
+                <h2>
+                    Tu cita, a tu manera 💗
+                </h2>
 
-                    <label class="checkbox-line">
+                <p>
+                    Selecciona los servicios y extras que deseas.
+                </p>
 
-                        <input
-                            type="checkbox"
-                            id="caviar"
-                            onchange="mostrarCaviar()"
-                        >
-
-                        🫧 También quiero caviar
-
-                    </label>
+            </div>
 
 
-                    <div id="caviarOpciones" class="oculto">
+            <div class="booking-layout">
+
+
+                <!-- FORMULARIO -->
+
+                <div class="booking-form">
+
+
+                    <!-- EXTRAS -->
+
+                    <div class="form-card">
+
+                        <div class="card-heading">
+                            <span>✨</span>
+
+                            <div>
+                                <h3>Extras</h3>
+                                <p>Personaliza aún más tu servicio.</p>
+                            </div>
+                        </div>
+
+
+                        <!-- FRANCES -->
+
+                        <div class="extra-box">
+
+                            <div class="switch-row">
+
+                                <div>
+                                    <strong>🇫🇷 Frances</strong>
+
+                                    <small>
+                                        Adicional fijo: $5.000
+                                    </small>
+                                </div>
+
+                                <label class="switch">
+                                    <input
+                                        type="checkbox"
+                                        id="frances">
+                                    <span></span>
+                                </label>
+
+                            </div>
+
+
+                            <div
+                                id="opcionesFrances"
+                                class="extra-options hidden">
+
+                                <label>
+                                    Tipo de frances
+
+                                    <select id="tipoFrances">
+
+                                        <option value="Clásico">
+                                            Clásico
+                                        </option>
+
+                                        <option value="Diagonal">
+                                            Diagonal
+                                        </option>
+
+                                        <option value="Doble">
+                                            Doble
+                                        </option>
+
+                                        <option value="De colores">
+                                            De colores
+                                        </option>
+
+                                        <option value="Creativo">
+                                            Creativo
+                                        </option>
+
+                                    </select>
+
+                                </label>
+
+
+                                <label>
+                                    ¿Cuántas uñas?
+
+                                    <select id="cantidadFrances">
+
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10" selected>10</option>
+
+                                    </select>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DISEÑO -->
+
+                        <div class="extra-box">
+
+                            <div class="switch-row">
+
+                                <div>
+                                    <strong>🎨 Diseño elaborado</strong>
+
+                                    <small>
+                                        Adicional: $5.000
+                                    </small>
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="disenoElaborado">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PIEDRERÍA -->
+
+                        <div class="extra-box">
+
+                            <div class="switch-row">
+
+                                <div>
+                                    <strong>💎 Piedrería</strong>
+
+                                    <small>
+                                        $500 por pepita
+                                    </small>
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="piedreria">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div
+                                id="opcionesPiedreria"
+                                class="extra-options hidden">
+
+                                <label>
+                                    Tipo
+
+                                    <select id="tipoPiedreria">
+
+                                        <option value="Cristales">
+                                            Cristales
+                                        </option>
+
+                                        <option value="Perlas">
+                                            Perlas
+                                        </option>
+
+                                        <option value="Charms">
+                                            Charms
+                                        </option>
+
+                                        <option value="Swarovski">
+                                            Swarovski
+                                        </option>
+
+                                    </select>
+
+                                </label>
+
+
+                                <label>
+                                    Cantidad de pepitas
+
+                                    <input
+                                        type="number"
+                                        id="cantidadPiedreria"
+                                        min="1"
+                                        value="1">
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CAVIAR -->
+
+                        <div class="extra-box">
+
+                            <div class="switch-row">
+
+                                <div>
+                                    <strong>✨ Caviar</strong>
+
+                                    <small>
+                                        $200 por uña
+                                    </small>
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="caviar">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div
+                                id="opcionesCaviar"
+                                class="extra-options hidden">
+
+                                <label>
+                                    Cantidad de uñas
+
+                                    <input
+                                        type="number"
+                                        id="cantidadCaviar"
+                                        min="1"
+                                        max="10"
+                                        value="1">
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- RETIRO -->
+
+                        <div class="extra-box">
+
+                            <div class="switch-row">
+
+                                <div>
+
+                                    <strong>🧹 Retiro</strong>
+
+                                    <small>
+                                        Solo si el sistema viene de otro lugar: $7.000
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="retiro">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRIMERA CITA -->
+
+                    <div class="form-card welcome-card">
+
+                        <div class="card-heading">
+
+                            <span>🎁</span>
+
+                            <div>
+
+                                <h3>Beneficio de bienvenida</h3>
+
+                                <p>
+                                    Disponible para nuevas clientas.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="beneficioNoLogin" class="beneficio-message">
+
+                            <p>
+                                🔐 Inicia sesión o crea una cuenta para
+                                comprobar si tienes disponible tu
+                                beneficio de primera cita.
+                            </p>
+
+                            <button
+                                type="button"
+                                class="small-button"
+                                onclick="abrirModalLogin()">
+
+                                Iniciar sesión
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="beneficioDisponible"
+                            class="beneficio-message hidden">
+
+                            <p>
+                                🎉 ¡Tienes disponible tu regalo de
+                                primera cita!
+                            </p>
+
+                            <label>
+                                Elige tu SPA gratis
+
+                                <select id="tipoSpa">
+
+                                    <option value="">
+                                        Selecciona una opción
+                                    </option>
+
+                                    <option value="Chocolaterapia">
+                                        🍫 Chocolaterapia
+                                    </option>
+
+                                    <option value="Veloterapia">
+                                        🕯️ Veloterapia
+                                    </option>
+
+                                    <option value="Jelly Spa">
+                                        🫧 Jelly Spa
+                                    </option>
+
+                                </select>
+
+                            </label>
+
+                            <p class="beneficio-validado">
+                                ✓ Este beneficio está vinculado a tu cuenta.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            id="beneficioUsado"
+                            class="beneficio-message hidden">
+
+                            <p>
+                                💗 Ya utilizaste tu beneficio de primera
+                                cita.
+                            </p>
+
+                            <label>
+                                Agregar SPA
+
+                                <select id="spaNormal">
+
+                                    <option value="">
+                                        No agregar SPA
+                                    </option>
+
+                                    <option value="Chocolaterapia">
+                                        🍫 Chocolaterapia — $7.000
+                                    </option>
+
+                                    <option value="Veloterapia">
+                                        🕯️ Veloterapia — $7.000
+                                    </option>
+
+                                    <option value="Jelly Spa">
+                                        🫧 Jelly Spa — $7.000
+                                    </option>
+
+                                </select>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- UBICACIÓN -->
+
+                    <div class="form-card">
+
+                        <div class="card-heading">
+
+                            <span>📍</span>
+
+                            <div>
+
+                                <h3>¿Dónde quieres tu cita?</h3>
+
+                                <p>
+                                    Elige el lugar de atención.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="location-options">
+
+                            <label class="location-option">
+
+                                <input
+                                    type="radio"
+                                    name="ubicacion"
+                                    value="Estudio"
+                                    checked>
+
+                                <span>
+                                    🏡
+                                    <strong>Estudio</strong>
+                                    <small>Sin costo adicional</small>
+                                </span>
+
+                            </label>
+
+
+                            <label class="location-option">
+
+                                <input
+                                    type="radio"
+                                    name="ubicacion"
+                                    value="Domicilio">
+
+                                <span>
+                                    🚗
+                                    <strong>Domicilio</strong>
+                                    <small>+$7.100</small>
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div
+                            id="campoDireccion"
+                            class="conditional-field hidden">
+
+                            <label>
+
+                                Dirección del domicilio
+
+                                <input
+                                    type="text"
+                                    id="direccion"
+                                    placeholder="Escribe la dirección">
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DATOS -->
+
+                    <div class="form-card">
+
+                        <div class="card-heading">
+
+                            <span>📅</span>
+
+                            <div>
+
+                                <h3>Datos de tu cita</h3>
+
+                                <p>
+                                    Cuéntanos cuándo quieres venir.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <label>
+
+                                Nombre completo
+
+                                <input
+                                    type="text"
+                                    id="nombreCliente"
+                                    placeholder="Tu nombre">
+
+                            </label>
+
+
+                            <label>
+
+                                Teléfono
+
+                                <input
+                                    type="tel"
+                                    id="telefonoCliente"
+                                    placeholder="300 000 0000">
+
+                            </label>
+
+
+                            <label>
+
+                                Fecha
+
+                                <input
+                                    type="date"
+                                    id="fechaCita">
+
+                            </label>
+
+
+                            <label>
+
+                                Hora
+
+                                <input
+                                    type="time"
+                                    id="horaCita">
+
+                            </label>
+
+                        </div>
+
 
                         <label>
-                            Cantidad de uñas con caviar
 
-                            <input
-                                type="number"
-                                id="cantidadCaviar"
-                                min="1"
-                                max="10"
-                                value="1"
-                                onchange="actualizarCotizacion()"
-                            >
+                            Nota adicional
+
+                            <textarea
+                                id="notaCliente"
+                                rows="4"
+                                placeholder="¿Tienes alguna idea, referencia o detalle que quieras contarnos? 💗"></textarea>
 
                         </label>
 
-                        <small>
-                            🫧 $200 por uña
-                        </small>
-
                     </div>
+
 
                 </div>
 
-            </div>
 
-        </div>
+                <!-- RESUMEN -->
+
+                <aside class="summary-card">
+
+                    <div class="summary-header">
+
+                        <span>🧾</span>
+
+                        <div>
+                            <h3>Tu cotización</h3>
+                            <p>Resumen de tu cita</p>
+                        </div>
+
+                    </div>
 
 
-        <!-- RETIRO -->
+                    <div id="resumen">
 
-        <div class="opcion-box">
-
-            <div class="opcion-titulo">
-
-                <div>
-
-                    <span class="opcion-emoji">♻️</span>
-
-                    <div>
-
-                        <h3>¿Tienes un sistema de otro lugar?</h3>
-
-                        <p>
-                            Retiro adicional: $7.000
+                        <p class="empty-summary">
+                            Selecciona un servicio para comenzar
+                            tu cotización. 💗
                         </p>
 
                     </div>
 
-                </div>
+
+                    <div class="total-row">
+
+                        <span>Total</span>
+
+                        <strong id="total">
+                            $0
+                        </strong>
+
+                    </div>
 
 
-                <label class="switch">
-
-                    <input
-                        type="checkbox"
-                        id="retiro"
-                        onchange="actualizarCotizacion()"
-                    >
-
-                    <span></span>
-
-                </label>
-
-            </div>
-
-            <p class="texto-ayuda">
-                💗 Si traes un sistema realizado en otro lugar,
-                se adiciona el valor del retiro.
-            </p>
-
-        </div>
-
-    </section>
+                    <div
+                        id="mensajeError"
+                        class="form-error hidden">
+                    </div>
 
 
-    <!-- =========================
-         PRIMERA VISITA
-    ========================== -->
+                    <button
+                        type="button"
+                        class="whatsapp-button"
+                        onclick="abrirWhatsApp()">
 
-    <section class="seccion regalo">
+                        💬 Reservar por WhatsApp
 
-        <div class="titulo-seccion">
-
-            <span>🎁</span>
-
-            <h2>Un regalito para ti 💗</h2>
-
-            <p>
-                Si es tu primera vez con nosotros,
-                queremos consentirte. 🎀
-            </p>
-
-        </div>
+                    </button>
 
 
-        <div class="primera-visita">
+                    <small class="summary-note">
+                        Al continuar se abrirá WhatsApp con los
+                        datos de tu reserva.
+                    </small>
 
-            <h3>¿Es tu primera cita en Morita Studio? 🌸</h3>
-
-
-            <div class="radio-grupo">
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="primera"
-                        value="si"
-                        onchange="mostrarRegalo()"
-                    >
-
-                    🎀 Sí, es mi primera vez
-
-                </label>
-
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="primera"
-                        value="no"
-                        checked
-                        onchange="mostrarRegalo()"
-                    >
-
-                    💅🏻 No, ya me he atendido antes
-
-                </label>
+                </aside>
 
             </div>
 
+        </section>
 
-            <div id="regaloOpciones" class="regalo-opciones oculto">
 
-                <h3>🎁 ¡Escoge tu SPA GRATIS!</h3>
+        <!-- ================= CONTACTO ================= -->
+
+        <section class="contact-section" id="contacto">
+
+            <div>
+
+                <span>💗 ¿Tienes alguna pregunta?</span>
+
+                <h2>
+                    Hablemos por WhatsApp
+                </h2>
 
                 <p>
-                    Por ser tu primera cita puedes escoger
-                    uno de estos regalitos. 💗✨
-                </p>
-
-
-                <div class="spa-grid">
-
-                    <label class="spa-card">
-
-                        <input
-                            type="radio"
-                            name="spa"
-                            value="Chocolaterapia 🍫"
-                            onchange="actualizarCotizacion()"
-                        >
-
-                        <span>🍫</span>
-
-                        <strong>Chocolaterapia</strong>
-
-                        <small>GRATIS 🎁</small>
-
-                    </label>
-
-
-                    <label class="spa-card">
-
-                        <input
-                            type="radio"
-                            name="spa"
-                            value="Veloterapia 🕯️"
-                            onchange="actualizarCotizacion()"
-                        >
-
-                        <span>🕯️</span>
-
-                        <strong>Veloterapia</strong>
-
-                        <small>GRATIS 🎁</small>
-
-                    </label>
-
-
-                    <label class="spa-card">
-
-                        <input
-                            type="radio"
-                            name="spa"
-                            value="Jelly Spa 🫧"
-                            onchange="actualizarCotizacion()"
-                        >
-
-                        <span>🫧</span>
-
-                        <strong>Jelly Spa</strong>
-
-                        <small>GRATIS 🎁</small>
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         DOMICILIO
-    ========================== -->
-
-    <section class="seccion">
-
-        <div class="titulo-seccion">
-
-            <span>🏠</span>
-
-            <h2>¿Dónde quieres tu cita?</h2>
-
-        </div>
-
-
-        <div class="ubicacion-grid">
-
-            <label class="ubicacion-card">
-
-                <input
-                    type="radio"
-                    name="ubicacion"
-                    value="Morita Studio"
-                    data-precio="0"
-                    checked
-                    onchange="actualizarCotizacion()"
-                >
-
-                <span>🌸</span>
-
-                <strong>Morita Studio</strong>
-
-                <small>Sin adicional</small>
-
-            </label>
-
-
-            <label class="ubicacion-card">
-
-                <input
-                    type="radio"
-                    name="ubicacion"
-                    value="Domicilio"
-                    data-precio="7100"
-                    onchange="actualizarCotizacion()"
-                >
-
-                <span>🏠</span>
-
-                <strong>A domicilio</strong>
-
-                <small>+$7.100</small>
-
-            </label>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         DATOS DE CLIENTA
-    ========================== -->
-
-    <section id="reserva" class="seccion reserva">
-
-        <div class="titulo-seccion">
-
-            <span>📅</span>
-
-            <h2>Datos de tu reserva</h2>
-
-            <p>
-                Cuéntanos cuándo quieres tu cita. 💗
-            </p>
-
-        </div>
-
-
-        <div class="formulario">
-
-            <div class="campo">
-
-                <label for="nombre">
-                    👩🏻 Tu nombre
-                </label>
-
-                <input
-                    type="text"
-                    id="nombre"
-                    placeholder="Escribe tu nombre"
-                >
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="telefono">
-                    📱 Tu teléfono
-                </label>
-
-                <input
-                    type="tel"
-                    id="telefono"
-                    placeholder="Ej: 305 383 6192"
-                >
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="fecha">
-                    📅 Fecha
-                </label>
-
-                <input
-                    type="date"
-                    id="fecha"
-                >
-
-            </div>
-
-
-            <div class="campo">
-
-                <label for="hora">
-                    🕐 Hora
-                </label>
-
-                <input
-                    type="time"
-                    id="hora"
-                >
-
-            </div>
-
-
-            <div class="campo campo-completo">
-
-                <label for="nota">
-                    💬 ¿Quieres contarnos algo?
-                </label>
-
-                <textarea
-                    id="nota"
-                    rows="4"
-                    placeholder="Ej: Quiero un diseño rosado, uñas largas, etc. 🎀"
-                ></textarea>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         RESUMEN
-    ========================== -->
-
-    <section class="seccion resumen-seccion">
-
-        <div class="titulo-seccion">
-
-            <span>🛍️</span>
-
-            <h2>Resumen de tu cita</h2>
-
-            <p>
-                Revisa todo antes de enviarnos tu reserva. 💗
-            </p>
-
-        </div>
-
-
-        <div class="resumen">
-
-            <div id="resumenContenido">
-
-                <p class="vacio">
-                    💅🏻 Selecciona algún servicio para comenzar.
+                    Escríbenos para resolver cualquier duda
+                    antes de reservar.
                 </p>
 
             </div>
 
 
-            <div class="total">
+            <a
+                href="https://wa.me/573053836192"
+                target="_blank"
+                class="contact-button">
 
-                <span>💗 Total a pagar</span>
+                💬 305 383 6192
 
-                <strong id="total">
-                    $0
-                </strong>
+            </a>
 
-            </div>
+        </section>
 
-        </div>
-
-
-        <button
-            onclick="abrirWhatsApp()"
-            class="btn-whatsapp"
-        >
-            💚 Reservar por WhatsApp
-        </button>
+    </main>
 
 
-        <p class="mensaje-final">
-            📲 Al continuar, se abrirá WhatsApp con todos los
-            detalles de tu reserva. ✨
-        </p>
-
-    </section>
-
-
-    <!-- =========================
-         CONTACTO
-    ========================== -->
-
-    <section id="contacto" class="contacto">
-
-        <div>
-
-            <span>🌸</span>
-
-            <h2>Morita Studio 💗</h2>
-
-            <p>
-                Gracias por elegirnos para consentir tus uñas. 💅🏻✨
-            </p>
-
-            <p class="telefono">
-                📱 305 383 6192
-            </p>
-
-        </div>
-
-    </section>
-
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
+        <div class="logo">
+            🌸 Morita Studio
+        </div>
+
         <p>
-            Hecho con 💗✨ por Morita Studio
+            Uñas bonitas, momentos bonitos. 💗
         </p>
 
+        <small>
+            © 2026 Morita Studio. Todos los derechos reservados.
+        </small>
+
     </footer>
+
+
+    <!-- ================= MODAL LOGIN ================= -->
+
+    <div
+        id="modalLogin"
+        class="modal hidden">
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="close-modal"
+                onclick="cerrarModalLogin()">
+
+                ×
+
+            </button>
+
+
+            <div class="modal-icon">
+                🌸
+            </div>
+
+
+            <h2 id="tituloModal">
+                Bienvenida a Morita Studio 💗
+            </h2>
+
+
+            <p id="subtituloModal">
+                Inicia sesión para reservar tu cita.
+            </p>
+
+
+            <!-- LOGIN -->
+
+            <form
+                id="formLogin"
+                onsubmit="iniciarSesion(event)">
+
+                <label>
+
+                    Correo electrónico
+
+                    <input
+                        type="email"
+                        id="loginCorreo"
+                        placeholder="tucorreo@gmail.com"
+                        required>
+
+                </label>
+
+
+                <label>
+
+                    Contraseña
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Tu contraseña"
+                        required>
+
+                </label>
+
+
+                <p
+                    id="errorLogin"
+                    class="modal-error">
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary full-button">
+
+                    🔐 Iniciar sesión
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTRO -->
+
+            <form
+                id="formRegistro"
+                class="hidden"
+                onsubmit="crearCuenta(event)">
+
+                <label>
+
+                    Nombre completo
+
+                    <input
+                        type="text"
+                        id="registroNombre"
+                        placeholder="Tu nombre"
+                        required>
+
+                </label>
+
+
+                <label>
+
+                    Número de celular
+
+                    <input
+                        type="tel"
+                        id="registroTelefono"
+                        placeholder="300 000 0000"
+                        required>
+
+                </label>
+
+
+                <label>
+
+                    Correo electrónico
+
+                    <input
+                        type="email"
+                        id="registroCorreo"
+                        placeholder="tucorreo@gmail.com"
+                        required>
+
+                </label>
+
+
+                <label>
+
+                    Contraseña
+
+                    <input
+                        type="password"
+                        id="registroPassword"
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
+                        required>
+
+                </label>
+
+
+                <p
+                    id="errorRegistro"
+                    class="modal-error">
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary full-button">
+
+                    🌸 Crear mi cuenta
+
+                </button>
+
+            </form>
+
+
+            <div class="modal-switch">
+
+                <span id="textoSwitch">
+                    ¿No tienes una cuenta?
+                </span>
+
+                <button
+                    type="button"
+                    onclick="alternarFormulario()"
+                    id="btnSwitch">
+
+                    Crear cuenta
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
     <script src="manicurista.js"></script>
